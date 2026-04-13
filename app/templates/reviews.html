@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}Reviews — {{ site.name }}{% endblock %}
+{% block meta_description %}See what our clients say about {{ site.name }}. {{ site.rating }}★ rating from 10,000+ happy customers.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/reviews.css">
+{% endblock %}
+
+{% block content %}
+
+<!-- ═══════════════ REVIEWS HERO ═══════════════ -->
+<section class="page-hero reviews-hero">
+    <div class="deco deco-blob" style="width:120px;height:120px;background:var(--accent);top:-20px;right:-20px;opacity:0.06;"></div>
+    <div class="deco deco-float" style="width:70px;height:70px;border:3px solid var(--primary-light);border-radius:50%;bottom:20%;left:6%;opacity:0.08;"></div>
+    <div class="container">
+        <span class="section-tag anim-fade-up">Testimonials</span>
+        <h1 class="page-hero-title anim-fade-up">What People <em>Say</em></h1>
+        <p class="page-hero-desc anim-fade-up">Real words from real clients who trusted Arathi with their beauty.</p>
+    </div>
+</section>
+
+
+<!-- ═══════════════ STATS BAR ═══════════════ -->
+<section class="review-stats">
+    <div class="container">
+        <div class="stats-row">
+            <div class="stat-block anim-fade-up">
+                <div class="stat-block-icon">⭐</div>
+                <span class="stat-num">{{ site.rating }}★</span>
+                <span class="stat-label">Google Rating</span>
+            </div>
+            <div class="stat-block anim-fade-up">
+                <div class="stat-block-icon">💜</div>
+                <span class="stat-num">10K+</span>
+                <span class="stat-label">Happy Clients</span>
+            </div>
+            <div class="stat-block anim-fade-up">
+                <div class="stat-block-icon">🏆</div>
+                <span class="stat-num">{{ site.years_experience }}+</span>
+                <span class="stat-label">Years of Trust</span>
+            </div>
+            <div class="stat-block anim-fade-up">
+                <div class="stat-block-icon">🎓</div>
+                <span class="stat-num">4</span>
+                <span class="stat-label">Certifications</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════ REVIEWS GRID ═══════════════ -->
+<section class="reviews-main">
+    <div class="container">
+        <div class="reviews-grid">
+            {% for rev in site.reviews %}
+            <div class="review-card anim-fade-up">
+                <span class="review-quote-mark">"</span>
+                <div class="review-card-header">
+                    <div class="review-avatar">{{ rev.name[0] }}</div>
+                    <div class="review-meta">
+                        <strong>{{ rev.name }}</strong>
+                        <span>{{ rev.date }}</span>
+                    </div>
+                </div>
+                <div class="review-stars">
+                    {% for i in range(rev.rating) %}★{% endfor %}{% for i in range(5 - rev.rating) %}☆{% endfor %}
+                </div>
+                <p class="review-text">"{{ rev.text }}"</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════ CTA ROW ═══════════════ -->
+<section class="review-cta-row">
+    <div class="container">
+        <div class="review-cta-cards">
+            <div class="review-cta-card purple anim-fade-up">
+                <h3>Loved Your Experience?</h3>
+                <p>Share your feedback and help other women discover Lookwell Parlour.</p>
+                <a href="{{ site.google_maps_url }}" target="_blank" rel="noopener noreferrer" class="btn">
+                    ⭐ Leave a Google Review
+                </a>
+            </div>
+            <div class="review-cta-card pink anim-fade-up">
+                <h3>Book Your Next Visit</h3>
+                <p>Ready for your next glow-up? Book an appointment on WhatsApp.</p>
+                <a href="{{ site.whatsapp_url }}"
+                   target="_blank" rel="noopener noreferrer" class="btn">
+                    💬 Book on WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="/" class="nav-logo">
+            <span class="logo-icon">LW</span>
+            <span class="logo-text">Lookwell</span>
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/" class="nav-link {% if active_nav == 'home' %}active{% endif %}">Home</a></li>
+            <li><a href="/about" class="nav-link {% if active_nav == 'about' %}active{% endif %}">About</a></li>
+            <li><a href="/services" class="nav-link {% if active_nav == 'services' %}active{% endif %}">Services</a></li>
+            <li><a href="/reviews" class="nav-link {% if active_nav == 'reviews' %}active{% endif %}">Reviews</a></li>
+            <li>
+                <a href="{{ site.whatsapp_url }}"
+                   target="_blank" rel="noopener noreferrer" class="nav-cta">
+                    Book Now
+                </a>
+            </li>
+        </ul>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</nav>

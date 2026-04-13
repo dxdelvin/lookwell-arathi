@@ -1,0 +1,546 @@
+/* ═══════════════════════════════════════════════
+   LOOKWELL — Base Layout v3
+   Navbar, Footer, Page-hero, CTA, WhatsApp FAB
+   ═══════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════
+   NAVBAR
+   ═══════════════════════════════════════════════ */
+.navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 16px 0;
+    transition: all var(--t-base);
+}
+
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 0 1px 30px rgba(0, 0, 0, 0.05);
+    padding: 8px 0;
+}
+
+.nav-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1001;
+}
+
+.logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: var(--white);
+    font-family: var(--font-script);
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-radius: 14px;
+    transform: rotate(-3deg);
+    box-shadow: 0 4px 16px var(--primary-glow);
+    transition: all var(--t-spring);
+}
+
+.nav-logo:hover .logo-icon {
+    transform: rotate(0deg) scale(1.06);
+}
+
+.logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* Desktop nav links */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.nav-link {
+    padding: 8px 16px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-light);
+    border-radius: var(--r-full);
+    transition: all var(--t-base);
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 50%;
+    width: 0; height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 2px;
+    transition: all var(--t-base);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after { width: 55%; }
+
+.nav-link:hover,
+.nav-link.active { color: var(--primary); }
+
+.nav-cta {
+    padding: 10px 22px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: var(--white) !important;
+    font-size: 0.84rem;
+    font-weight: 600;
+    border-radius: var(--r-full);
+    transition: all var(--t-base);
+    box-shadow: 0 2px 14px var(--primary-glow);
+}
+
+.nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px var(--primary-glow);
+}
+
+/* Hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 4px;
+    z-index: 1001;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hamburger span {
+    width: 22px; height: 2px;
+    background: var(--text);
+    border-radius: 4px;
+    transition: all var(--t-base);
+    transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* Mobile nav overlay */
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--t-base);
+}
+.nav-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════ */
+.footer {
+    background: var(--bg-dark);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 72px 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
+}
+
+/* Footer blobs */
+.footer .deco-blob {
+    opacity: 0.03;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.5fr 1fr;
+    gap: 36px;
+    position: relative;
+    z-index: 1;
+}
+
+.footer h4 {
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 1.3rem;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.footer h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 28px; height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 2px;
+}
+
+.footer-brand .logo-text { color: var(--white); }
+
+.footer-tagline {
+    font-family: var(--font-script);
+    font-size: 1.15rem;
+    color: var(--secondary-light);
+    margin-bottom: 0.3rem;
+}
+
+.footer-owner { font-size: 0.85rem; }
+
+.footer-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-nav a {
+    font-size: 0.88rem;
+    transition: all var(--t-base);
+    display: inline-block;
+}
+
+.footer-nav a:hover {
+    color: var(--secondary-light);
+    transform: translateX(4px);
+}
+
+.footer-contact p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.4rem;
+}
+
+.footer-contact a:hover { color: var(--secondary-light); }
+
+.footer-socials {
+    display: flex;
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.6);
+    transition: all var(--t-spring);
+}
+
+.social-link:hover {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-color: transparent;
+    color: var(--white);
+    transform: translateY(-3px) rotate(-3deg);
+}
+
+.footer-cta .btn { margin-top: 0.8rem; }
+
+.footer-bottom {
+    margin-top: 48px;
+    padding: 18px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+
+/* ═══════════════════════════════════════════════
+   WHATSAPP FAB
+   ═══════════════════════════════════════════════ */
+.whatsapp-fab {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    z-index: 998;
+    width: 56px; height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #25D366;
+    border-radius: 50%;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    transition: all var(--t-spring);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.whatsapp-fab:hover {
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: 0 8px 32px rgba(37, 211, 102, 0.5);
+}
+
+.fab-pulse {
+    position: absolute;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: #25D366;
+    animation: fabPulse 2.5s infinite;
+    pointer-events: none;
+}
+
+@keyframes fabPulse {
+    0% { transform: scale(1); opacity: 0.35; }
+    100% { transform: scale(1.7); opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════
+   BACK TO TOP
+   ═══════════════════════════════════════════════ */
+.back-to-top {
+    position: fixed;
+    bottom: 90px; right: 24px;
+    z-index: 997;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1px solid rgba(124, 58, 237, 0.12);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 1.1rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all var(--t-base);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-3px);
+}
+
+
+/* ═══════════════════════════════════════════════
+   PAGE HERO (inner pages: about, services, reviews)
+   ═══════════════════════════════════════════════ */
+.page-hero {
+    position: relative;
+    padding: 140px 0 70px;
+    background: var(--bg-alt);
+    overflow: hidden;
+    text-align: center;
+}
+
+.page-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.12), transparent);
+}
+
+/* Decorative blobs in page hero */
+.page-hero .deco {
+    opacity: 0.06;
+}
+
+.page-hero-title { margin-bottom: 0.8rem; }
+
+.page-hero-desc {
+    font-size: 1.05rem;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+/* Section wave divider */
+.wave-divider {
+    display: block;
+    width: 100%;
+    line-height: 0;
+    margin-top: -1px;
+}
+
+.wave-divider svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* ═══════════════════════════════════════════════
+   CTA BANNER (shared across all pages)
+   ═══════════════════════════════════════════════ */
+.cta-banner {
+    padding: 80px 0;
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, #9333EA 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-banner .deco {
+    opacity: 0.08;
+}
+
+.cta-inner {
+    position: relative;
+    z-index: 1;
+}
+
+.cta-banner h2 {
+    color: var(--white);
+    margin-bottom: 0.5rem;
+}
+
+.cta-banner h2 em {
+    -webkit-text-fill-color: var(--accent-light);
+    background: none;
+}
+
+.cta-banner p {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 1.05rem;
+    margin-bottom: 1.8rem;
+}
+
+.cta-banner .btn-primary {
+    background: var(--white);
+    color: var(--primary);
+    border-color: var(--white);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.cta-banner .btn-primary:hover {
+    background: var(--accent-light);
+    border-color: var(--accent-light);
+    color: var(--primary-dark);
+}
+
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — Layout components
+   ═══════════════════════════════════════════════ */
+@media (max-width: 992px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Mobile nav */
+    .hamburger { display: flex; }
+
+    .nav-links {
+        position: fixed;
+        top: 0; right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100vh;
+        background: var(--white);
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+        padding: 24px;
+        transition: right 0.4s var(--ease);
+        z-index: 1000;
+        box-shadow: -8px 0 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.open {
+        right: 0;
+    }
+
+    .nav-link {
+        font-size: 1.15rem;
+        padding: 14px 20px;
+        width: 100%;
+        text-align: left;
+    }
+
+    .nav-link::after { display: none; }
+
+    .nav-link.active {
+        background: rgba(124, 58, 237, 0.06);
+        border-radius: var(--r-md);
+    }
+
+    .nav-cta {
+        padding: 14px 28px;
+        font-size: 0.95rem;
+        text-align: center;
+        margin-top: 8px;
+    }
+
+    /* Footer */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        text-align: center;
+    }
+
+    .footer h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footer-socials { justify-content: center; }
+
+    /* Page hero */
+    .page-hero {
+        padding: 120px 0 50px;
+    }
+
+    /* WhatsApp FAB */
+    .whatsapp-fab {
+        bottom: 16px; right: 16px;
+        width: 50px; height: 50px;
+    }
+
+    .back-to-top {
+        bottom: 76px; right: 16px;
+        width: 38px; height: 38px;
+    }
+
+    .cta-banner { padding: 60px 0; }
+}
+
+@media (max-width: 480px) {
+    .footer { padding: 52px 0 0; }
+}

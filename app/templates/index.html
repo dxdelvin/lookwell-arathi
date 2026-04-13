@@ -1,0 +1,254 @@
+{% extends "base.html" %}
+{% block title %}{{ site.owner }} — {{ site.name }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/index.css">
+{% endblock %}
+
+{% block content %}
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero" id="hero">
+    <canvas id="heroCanvas"></canvas>
+    <div class="hero-overlay"></div>
+
+    <!-- Floating particles layer -->
+    <div class="hero-particles" id="heroParticles"></div>
+
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span class="badge-dot"></span>
+            {{ site.tagline }}
+        </div>
+        <h1 class="hero-title">
+            <span class="hero-pre">Hi, I'm</span>
+            <span class="hero-name" id="heroName">{{ site.owner }}</span>
+            <span class="hero-sub">Professional Beauty Expert</span>
+        </h1>
+        <p class="hero-desc">
+            Professionally trained at <strong>VLCC</strong>, <strong>Jawed Habib</strong>,
+            <strong>Lakme</strong> &amp; <strong>ICAN</strong> — bringing world-class beauty
+            expertise to Airoli, Navi Mumbai.
+        </p>
+        <div class="hero-actions">
+            <a href="{{ site.whatsapp_url }}"
+               target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg btn-glow">
+                <span class="btn-icon">💬</span> Book Appointment
+            </a>
+            <a href="/services" class="btn btn-outline btn-lg btn-glass">
+                Explore Services <span class="btn-arrow">→</span>
+            </a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat glass-card">
+                <span class="stat-num">{{ site.rating }}★</span>
+                <span class="stat-label">Google Rating</span>
+            </div>
+            <div class="stat glass-card">
+                <span class="stat-num">10K+</span>
+                <span class="stat-label">Happy Clients</span>
+            </div>
+            <div class="stat glass-card">
+                <span class="stat-num">{{ site.years_experience }}+</span>
+                <span class="stat-label">Years Experience</span>
+            </div>
+        </div>
+    </div>
+    <div class="hero-scroll-hint">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+
+<!-- ═══════════════ MARQUEE STRIP ═══════════════ -->
+<div class="marquee-strip">
+    <div class="marquee-track">
+        {% for svc in site.services %}
+        <span class="marquee-item">{{ svc.icon }} {{ svc.title }}</span>
+        <span class="marquee-dot">✦</span>
+        {% endfor %}
+        {% for svc in site.services %}
+        <span class="marquee-item">{{ svc.icon }} {{ svc.title }}</span>
+        <span class="marquee-dot">✦</span>
+        {% endfor %}
+    </div>
+</div>
+
+
+<!-- ═══════════════ SERVICES STRIP ═══════════════ -->
+<section class="services-strip" id="servicesStrip">
+    <div class="svc-strip-bg-shape"></div>
+    <div class="container">
+        <div class="section-header anim-fade-up">
+            <span class="section-tag">What We Offer</span>
+            <h2 class="section-title">Expert <em>Beauty Services</em></h2>
+            <p class="section-desc">From bridal glam to everyday glow — every service is crafted with professional precision and personal care.</p>
+        </div>
+
+        <div class="services-grid">
+            {% for svc in site.services %}
+            <a href="/services#{{ svc.id }}" class="svc-tile anim-fade-up">
+                <div class="svc-tile-accent"></div>
+                <div class="svc-tile-top">
+                    <div class="svc-tile-icon">{{ svc.icon }}</div>
+                    <span class="svc-tile-count">{{ svc['items'] | length }} treatments</span>
+                </div>
+                <div class="svc-tile-body">
+                    <h3 class="svc-tile-title">{{ svc.title }}</h3>
+                    <p class="svc-tile-desc">{{ svc.description | truncate(72) }}</p>
+                </div>
+                <div class="svc-tile-footer">
+                    <span class="svc-tile-cta">Explore <span class="svc-tile-arrow">→</span></span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+
+        <div class="svc-strip-bottom anim-fade-up">
+            <p class="svc-strip-note">✦ Walk-ins welcome · By appointment preferred</p>
+            <a href="/services" class="btn btn-primary">View All Services →</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════ ABOUT TEASER ═══════════════ -->
+<section class="about-teaser" id="aboutTeaser">
+    <div class="container about-teaser-grid">
+        <div class="about-teaser-visual anim-fade-right">
+            <div class="about-photo-frame">
+                <div class="about-photo-placeholder">
+                    <span class="placeholder-icon">✨</span>
+                    <span>Arathi Dsouza</span>
+                </div>
+                <div class="geo-deco geo-tri"></div>
+                <div class="geo-deco geo-circle"></div>
+                <div class="geo-deco geo-ring"></div>
+                <div class="geo-deco geo-star"></div>
+            </div>
+        </div>
+        <div class="about-teaser-content anim-fade-left">
+            <span class="section-tag">Meet The Expert</span>
+            <h2 class="section-title">The Person Behind <em>Lookwell</em></h2>
+            <p>
+                With over <strong>{{ site.years_experience }} years</strong> of experience and professional training
+                from India's top beauty institutions, <strong>{{ site.owner }}</strong> has transformed the beauty
+                experience for hundreds of women in Airoli.
+            </p>
+            <div class="training-badges">
+                {% for t in site.training %}
+                <div class="badge glass-card-light">
+                    <span class="badge-icon">{{ t.icon }}</span>
+                    <span class="badge-name">{{ t.name }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            <a href="/about" class="btn btn-outline">Learn More About Arathi →</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════ TESTIMONIALS ═══════════════ -->
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <div class="section-header anim-fade-up">
+            <span class="section-tag">Client Love</span>
+            <h2 class="section-title">What Our <em>Clients</em> Say</h2>
+        </div>
+        <div class="testimonial-track" id="testimonialTrack">
+            {% for rev in site.reviews %}
+            <div class="testimonial-card anim-fade-up">
+                <div class="testimonial-quote">"</div>
+                <div class="testimonial-stars">
+                    {% for i in range(rev.rating) %}★{% endfor %}{% for i in range(5 - rev.rating) %}☆{% endfor %}
+                </div>
+                <p class="testimonial-text">"{{ rev.text }}"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">{{ rev.name[0] }}</div>
+                    <div>
+                        <strong>{{ rev.name }}</strong>
+                        <span>{{ rev.date }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-2">
+            <a href="/reviews" class="btn btn-outline">See All Reviews →</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════ MAP ═══════════════ -->
+<section class="map-section" id="mapSection">
+    <div class="container">
+        <div class="map-grid">
+            <div class="map-info anim-fade-right">
+                <span class="section-tag">Find Us</span>
+                <h2 class="section-title">Visit Our <em>Parlour</em></h2>
+                <div class="map-details">
+                    <div class="map-detail">
+                        <span class="detail-icon">📍</span>
+                        <div>
+                            <strong>Address</strong>
+                            <p>{{ site.address }}</p>
+                        </div>
+                    </div>
+                    <div class="map-detail">
+                        <span class="detail-icon">📞</span>
+                        <div>
+                            <strong>Phone</strong>
+                            <p><a href="tel:{{ site.phone_primary }}">{{ site.phone_primary }}</a></p>
+                            <p><a href="tel:{{ site.phone_secondary }}">{{ site.phone_secondary }}</a></p>
+                        </div>
+                    </div>
+                    <div class="map-detail">
+                        <span class="detail-icon">💬</span>
+                        <div>
+                            <strong>WhatsApp</strong>
+                            <p><a href="https://wa.me/{{ site.whatsapp_number }}" target="_blank" rel="noopener noreferrer">Chat with us</a></p>
+                        </div>
+                    </div>
+                    <div class="map-detail">
+                        <span class="detail-icon">🕐</span>
+                        <div>
+                            <strong>Hours</strong>
+                            <p>Mon - Sun: 10:00 AM — 8:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ site.google_maps_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    📍 Get Directions
+                </a>
+            </div>
+            <div class="map-container anim-fade-left">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════ CTA BANNER ═══════════════ -->
+<section class="cta-banner">
+    <div class="container text-center">
+        <div class="cta-inner">
+            <h2 class="anim-fade-up">Ready to <em>Glow</em>?</h2>
+            <p class="anim-fade-up">Book your appointment today and experience the Lookwell difference.</p>
+            <a href="{{ site.whatsapp_url }}"
+               target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg anim-fade-up">
+                💬 Book on WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/three-scene.js"></script>
+<script src="/static/js/map.js"></script>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}About {{ site.owner }} — {{ site.name }}{% endblock %}
+{% block meta_description %}Meet {{ site.owner }}, the beauty expert behind {{ site.name }}. Professionally trained at VLCC, Jawed Habib, Lakme & ICAN.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/about.css">
+{% endblock %}
+
+{% block content %}
+
+<!-- ═══════════════ ABOUT HERO ═══════════════ -->
+<section class="page-hero about-hero">
+    <div class="deco deco-blob" style="width:160px;height:160px;background:var(--primary);top:-40px;right:-40px;opacity:0.06;"></div>
+    <div class="deco deco-float" style="width:80px;height:80px;border:3px solid var(--secondary);border-radius:50%;bottom:20%;left:5%;opacity:0.08;"></div>
+    <div class="container">
+        <span class="section-tag anim-fade-up">About</span>
+        <h1 class="page-hero-title anim-fade-up">Meet <em>{{ site.owner }}</em></h1>
+        <p class="page-hero-desc anim-fade-up">The passion, the skill, the person behind every transformation at Lookwell.</p>
+    </div>
+</section>
+
+
+<!-- ═══════════════ ARATHI'S STORY ═══════════════ -->
+<section class="about-story">
+    <div class="container about-story-grid">
+        <div class="story-visual anim-fade-right">
+            <div class="experience-badge">
+                <span class="badge-number">{{ site.years_experience }}+</span>
+                <span class="badge-text">Years</span>
+                <span class="badge-sub">of beauty expertise</span>
+            </div>
+            <div class="geo-deco geo-tri" style="top:-14px;right:-14px;"></div>
+            <div class="geo-deco geo-circle" style="bottom:10%;left:-18px;"></div>
+        </div>
+        <div class="story-content anim-fade-left">
+            <h2 class="section-title">My Journey in Beauty</h2>
+            <p>
+                Beauty has always been more than a profession for me — it's a passion that started early
+                and has only grown stronger over the years. After completing my professional training at
+                some of India's most prestigious beauty institutions, I knew I wanted to bring world-class
+                beauty services right to my community in Airoli.
+            </p>
+            <p>
+                <strong>Lookwell Ladies Beauty Parlour</strong> was born from the desire to make
+                every woman feel confident, beautiful, and empowered. Whether it's a bridal makeover that
+                makes your special day unforgettable, or a simple facial that gives you that inner glow —
+                I pour my heart into every service.
+            </p>
+            <p>
+                What sets us apart is the personal touch. Every client gets my undivided attention, and
+                I take the time to understand what <em>you</em> need. Because beauty isn't one-size-fits-all.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════ CREDENTIALS ═══════════════ -->
+<section class="credentials">
+    <div class="container">
+        <div class="section-header anim-fade-up">
+            <span class="section-tag">Credentials</span>
+            <h2 class="section-title">Professionally Trained</h2>
+            <p class="section-desc">Certified and trained at India's most respected beauty institutions.</p>
+        </div>
+        <div class="credentials-grid">
+            <div class="credential-card anim-fade-up">
+                <div class="credential-icon">🏅</div>
+                <h3>VLCC</h3>
+                <p>Advanced beauty therapy and skin care certification from India's leading wellness brand.</p>
+            </div>
+            <div class="credential-card anim-fade-up">
+                <div class="credential-icon">✂️</div>
+                <h3>Jawed Habib</h3>
+                <p>Professional hair styling, cutting, and coloring techniques from the legendary hair maestro's academy.</p>
+            </div>
+            <div class="credential-card anim-fade-up">
+                <div class="credential-icon">💄</div>
+                <h3>Lakme</h3>
+                <p>Makeup artistry and bridal styling from Lakme Academy — the gold standard in Indian beauty education.</p>
+            </div>
+            <div class="credential-card anim-fade-up">
+                <div class="credential-icon">🎓</div>
+                <h3>ICAN</h3>
+                <p>International certification covering advanced aesthetic treatments and modern beauty techniques.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section class="cta-banner">
+    <div class="container text-center">
+        <div class="cta-inner">
+            <h2 class="anim-fade-up">Let's Create Something <em>Beautiful</em></h2>
+            <p class="anim-fade-up">Book your appointment today and experience the Lookwell difference.</p>
+            <a href="{{ site.whatsapp_url }}"
+               target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg anim-fade-up">
+                💬 Book on WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

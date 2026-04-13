@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+{% block title %}Services — {{ site.name }}{% endblock %}
+{% block meta_description %}Explore our beauty services: Skin Treatment, Hair Care, Laser, Makeup, Nail Art & more at {{ site.name }}, Airoli.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="/static/css/services.css">
+{% endblock %}
+
+{% block content %}
+
+<!-- ═══════════════ SERVICES HERO ═══════════════ -->
+<section class="page-hero services-hero">
+    <div class="svc-hero-orb svc-hero-orb-1"></div>
+    <div class="svc-hero-orb svc-hero-orb-2"></div>
+    <div class="container">
+        <span class="section-tag anim-fade-up">What We Offer</span>
+        <h1 class="page-hero-title anim-fade-up">Our <em>Services</em></h1>
+        <p class="page-hero-desc anim-fade-up">{{ site.owner }} brings {{ site.years_experience }}+ years of professional expertise to every treatment — tailored for you, every time.</p>
+        <p class="svc-hero-hint anim-fade-up">✦ Tap any service card to see full details &amp; book instantly</p>
+    </div>
+</section>
+
+
+<!-- ═══════════════ SERVICE CARDS ═══════════════ -->
+<section class="services-main">
+    <div class="container">
+
+        <div class="svc-cards-grid">
+        {% for svc in site.services %}
+        <div class="svc-card anim-fade-up"
+             role="button" tabindex="0"
+             id="{{ svc.id }}"
+             data-id="{{ svc.id }}"
+             data-title="{{ svc.title }}"
+             data-icon="{{ svc.icon }}"
+             data-description="{{ svc.long_description }}"
+             data-highlights="{{ svc['highlights'] | join('||') }}"
+             data-items="{{ svc['items'] | join('||') }}"
+             data-photo="{{ svc.photo }}"
+             onclick="openServiceModal(this)"
+             onkeydown="if(event.key==='Enter'||event.key===' ')openServiceModal(this)">
+
+            <div class="svc-card-head">
+                <div class="svc-card-icon-wrap">{{ svc.icon }}</div>
+                <span class="svc-card-count">{{ svc['items'] | length }} treatments</span>
+                <div class="svc-card-head-orb"></div>
+            </div>
+
+            <div class="svc-card-body">
+                <h3 class="svc-card-title">{{ svc.title }}</h3>
+                <p class="svc-card-desc">{{ svc.description | truncate(90) }}</p>
+                <div class="svc-card-tags">
+                    {% for item in svc['items'] %}
+                    <span class="svc-card-tag">{{ item }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="svc-card-footer">
+                <span class="svc-card-cta">View Details <span class="svc-card-arrow">→</span></span>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+
+        <div class="svc-custom-cta anim-fade-up">
+            <div class="svc-custom-cta-inner">
+                <div class="svc-custom-cta-icon">💬</div>
+                <div class="svc-custom-cta-text">
+                    <h3>Not sure which service is right for you?</h3>
+                    <p>Chat with Arathi directly — she'll suggest the perfect treatment for your needs.</p>
+                </div>
+                <a href="{{ site.whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    Ask Arathi
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ═══════════════ SERVICE DETAIL MODAL ═══════════════ -->
+<div class="svc-modal-backdrop" id="svcModalBackdrop" onclick="closeServiceModal()"></div>
+<div class="svc-modal" id="svcModal" role="dialog" aria-modal="true" aria-labelledby="svcModalTitle">
+    <button class="svc-modal-close" id="svcModalClose" onclick="closeServiceModal()" aria-label="Close">&times;</button>
+    <div class="svc-modal-inner">
+        <div class="svc-modal-photo-wrap">
+            <img class="svc-modal-photo" id="svcModalPhoto" src="" alt="" loading="lazy">
+            <div class="svc-modal-photo-placeholder" id="svcModalPhotoPlaceholder">
+                <span id="svcModalPhotoIcon"></span>
+                <span>Photo coming soon</span>
+            </div>
+            <div class="svc-modal-photo-badge" id="svcModalBadgeIcon"></div>
+        </div>
+        <div class="svc-modal-body">
+            <span class="section-tag" id="svcModalTag">Service</span>
+            <h2 class="svc-modal-title" id="svcModalTitle"></h2>
+            <p class="svc-modal-desc" id="svcModalDesc"></p>
+
+            <div class="svc-modal-highlights" id="svcModalHighlights"></div>
+
+            <div class="svc-modal-includes">
+                <h4>What's included</h4>
+                <div class="svc-modal-items" id="svcModalItems"></div>
+            </div>
+
+            <div class="svc-modal-actions">
+                <a id="svcModalWhatsapp" href="{{ site.whatsapp_url }}"
+                   target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+                    💬 Book This Service
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ═══════════════ CTA ═══════════════ -->
+<section class="cta-banner">
+    <div class="container text-center">
+        <div class="cta-inner">
+            <h2 class="anim-fade-up">Not Sure What You Need?</h2>
+            <p class="anim-fade-up">Chat with Arathi directly — she'll recommend the perfect treatment for you.</p>
+            <a href="{{ site.whatsapp_url }}"
+               target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg anim-fade-up">
+                💬 Ask Arathi on WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+    const WA_BASE = "{{ site.whatsapp_url }}";
+    const WA_NUMBER = "{{ site.whatsapp_number }}";
+
+    window.openServiceModal = function (el) {
+        const title      = el.dataset.title;
+        const icon       = el.dataset.icon;
+        const desc       = el.dataset.description;
+        const highlights = el.dataset.highlights.split('||').filter(Boolean);
+        const items      = el.dataset.items.split('||').filter(Boolean);
+        const photo      = el.dataset.photo;
+
+        document.getElementById('svcModalTitle').textContent = title;
+        document.getElementById('svcModalDesc').textContent  = desc;
+        document.getElementById('svcModalPhotoIcon').textContent = icon;
+        document.getElementById('svcModalBadgeIcon').textContent = icon;
+
+        // Photo: show image if it loads, fallback to placeholder
+        const img = document.getElementById('svcModalPhoto');
+        const placeholder = document.getElementById('svcModalPhotoPlaceholder');
+        img.style.display = 'none';
+        placeholder.style.display = 'flex';
+        img.onload = () => {
+            img.style.display = 'block';
+            placeholder.style.display = 'none';
+        };
+        img.onerror = () => {
+            img.style.display = 'none';
+            placeholder.style.display = 'flex';
+        };
+        img.src = photo;
+        img.alt = title;
+
+        // Highlights
+        const hlEl = document.getElementById('svcModalHighlights');
+        hlEl.innerHTML = highlights.map(h =>
+            `<div class="svc-highlight-item"><span class="svc-highlight-dot">✦</span>${h}</div>`
+        ).join('');
+
+        // Items
+        const itemsEl = document.getElementById('svcModalItems');
+        itemsEl.innerHTML = items.map(it =>
+            `<span class="service-item-tag">${it}</span>`
+        ).join('');
+
+        // WhatsApp link with service name
+        const msg = encodeURIComponent(`Hi, I'd like to book the ${title} service at Lookwell Parlour 💜`);
+        document.getElementById('svcModalWhatsapp').href = `https://wa.me/${WA_NUMBER}?text=${msg}`;
+
+        // Open modal
+        document.getElementById('svcModalBackdrop').classList.add('show');
+        document.getElementById('svcModal').classList.add('show');
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeServiceModal = function () {
+        document.getElementById('svcModalBackdrop').classList.remove('show');
+        document.getElementById('svcModal').classList.remove('show');
+        document.body.style.overflow = '';
+    };
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeServiceModal();
+    });
+})();
+</script>
+{% endblock %}
+
