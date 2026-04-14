@@ -1,8 +1,130 @@
 /* ═══════════════════════════════════════════════
-   LOOKWELL — About Page v3  (mobile-first)
+   LOOKWELL — About Page v5  (redesign)
+   Mobile-first · Dark hero · Numbered credentials
    ═══════════════════════════════════════════════ */
 
-/* ── About Story ────────────────────────────── */
+
+/* ══════════════════════════════════════════════
+   HERO — Dark Luxury (matching services)
+   ══════════════════════════════════════════════ */
+.about-hero {
+    background: linear-gradient(145deg, #110728 0%, #1C0B38 50%, #0D0520 100%);
+    color: white;
+}
+
+.about-hero::after { display: none; }
+
+/* Decorative orbs */
+.abt-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.abt-orb-1 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(244, 114, 182, 0.16) 0%, transparent 70%);
+    top: -100px; right: -80px;
+    animation: abtOrbFloat 9s ease-in-out infinite;
+}
+
+.abt-orb-2 {
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+    bottom: -50px; left: -40px;
+    animation: abtOrbFloat 11s ease-in-out infinite reverse;
+}
+
+.abt-orb-3 {
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(196, 181, 253, 0.1) 0%, transparent 70%);
+    top: 35%; left: 25%;
+    animation: abtOrbFloat 13s ease-in-out infinite 2s;
+}
+
+@keyframes abtOrbFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-18px) scale(1.04); }
+}
+
+.abt-hero-inner {
+    position: relative;
+    z-index: 1;
+}
+
+/* Pill tag on dark bg */
+.abt-hero-tag {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.14);
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.abt-hero-heading {
+    font-size: clamp(2.4rem, 7vw, 4.4rem);
+    color: white;
+    margin: 16px auto 20px;
+    line-height: 1.12;
+    max-width: 620px;
+}
+
+.abt-hero-sub {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.68);
+    max-width: 480px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+}
+
+/* Hero stats bar */
+.abt-hero-stats {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--r-full);
+    padding: 14px 8px;
+    margin: 0 auto;
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.abt-hero-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.abt-hero-stat-num {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1.1;
+}
+
+.abt-hero-stat-label {
+    font-size: 0.68rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-top: 3px;
+    white-space: nowrap;
+}
+
+.abt-hero-stat-sep {
+    width: 1px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.12);
+    flex-shrink: 0;
+}
+
+
+/* ══════════════════════════════════════════════
+   STORY SECTION
+   ══════════════════════════════════════════════ */
 .about-story {
     padding: 80px 0;
     position: relative;
@@ -15,52 +137,91 @@
     align-items: center;
 }
 
+/* Visual panel — gradient card with badge */
 .story-visual {
     position: relative;
-    max-width: 340px;
+    max-width: 360px;
     margin: 0 auto;
 }
 
-.experience-badge {
-    width: 100%;
-    aspect-ratio: 1;
-    background: linear-gradient(160deg, var(--primary-light), var(--coral));
-    border-radius: 40% 60% 55% 45% / 55% 40% 60% 45%;
+.story-visual-panel {
+    position: relative;
+    background: linear-gradient(160deg, #7C3AED 0%, #5B21B6 60%, #4C1D95 100%);
+    border-radius: var(--r-xl);
+    padding: 48px 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 20px;
+    overflow: hidden;
+    min-height: 300px;
+}
+
+/* Decorative orbs inside the panel */
+.story-visual-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.story-visual-orb-1 {
+    width: 180px; height: 180px;
+    background: rgba(255, 255, 255, 0.06);
+    bottom: -60px; right: -50px;
+}
+
+.story-visual-orb-2 {
+    width: 100px; height: 100px;
+    background: rgba(255, 255, 255, 0.04);
+    top: -30px; left: -30px;
+}
+
+.experience-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 4px;
     color: var(--white);
-    animation: blobMorph 10s ease-in-out infinite;
-    box-shadow: 0 16px 48px rgba(124, 58, 237, 0.18);
-    max-width: 220px;
-    margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .experience-badge .badge-number {
     font-family: var(--font-heading);
-    font-size: 3.5rem;
+    font-size: 4.5rem;
     font-weight: 800;
     line-height: 1;
+    background: linear-gradient(180deg, white 60%, rgba(255,255,255,0.6) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .experience-badge .badge-text {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     font-weight: 600;
+    opacity: 0.9;
 }
 
 .experience-badge .badge-sub {
     font-family: var(--font-script);
-    font-size: 1.1rem;
-    opacity: 0.85;
+    font-size: 1.15rem;
+    opacity: 0.8;
 }
 
-/* Story decorations */
-.story-visual .geo-deco { position: absolute; z-index: 2; }
+.story-visual-quote {
+    font-family: var(--font-script);
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.3px;
+}
 
+/* Story text */
 .story-content .section-tag { display: inline-flex; }
 
 .story-content p {
@@ -69,12 +230,113 @@
 }
 
 
-/* ── Credentials ────────────────────────────── */
-.credentials {
+/* ══════════════════════════════════════════════
+   PHILOSOPHY SECTION
+   ══════════════════════════════════════════════ */
+.about-philosophy {
     padding: 80px 0;
     background: var(--bg-alt);
     position: relative;
 }
+
+.philosophy-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.philosophy-card {
+    position: relative;
+    background: var(--white);
+    border-radius: var(--r-lg);
+    padding: 28px 24px;
+    border: 1px solid rgba(124, 58, 237, 0.06);
+    overflow: hidden;
+    transition: transform 0.32s var(--ease), box-shadow 0.32s var(--ease), border-color 0.32s;
+}
+
+/* Accent bar */
+.philosophy-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transform-origin: left;
+    transform: scaleX(0.3);
+    transition: transform 0.4s var(--ease-spring);
+}
+
+.philosophy-card:hover::before { transform: scaleX(1); }
+
+.philosophy-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.07), 0 8px 24px rgba(124, 58, 237, 0.06);
+    border-color: rgba(124, 58, 237, 0.12);
+}
+
+/* Watermark number */
+.philosophy-num {
+    position: absolute;
+    top: 6px; right: 14px;
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--primary);
+    opacity: 0.05;
+    letter-spacing: -3px;
+    pointer-events: none;
+    user-select: none;
+    transition: opacity 0.3s;
+}
+
+.philosophy-card:hover .philosophy-num { opacity: 0.09; }
+
+.philosophy-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: rgba(124, 58, 237, 0.08);
+    border: 1px solid rgba(124, 58, 237, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    margin-bottom: 16px;
+    transition: transform 0.4s var(--ease-spring), background 0.3s;
+}
+
+.philosophy-card:hover .philosophy-icon {
+    transform: scale(1.1) rotate(-6deg);
+    background: rgba(124, 58, 237, 0.14);
+}
+
+.philosophy-icon svg { width: 26px; height: 26px; }
+
+.philosophy-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.philosophy-card p {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    margin-bottom: 0;
+}
+
+
+/* ══════════════════════════════════════════════
+   CREDENTIALS — Per-card accents
+   ══════════════════════════════════════════════ */
+.credentials {
+    padding: 80px 0;
+    position: relative;
+}
+
+/* Dark bg for credentials hero text */
+.abt-cred-tag { }
+.abt-cred-title { }
+.abt-cred-desc { }
 
 .credentials-grid {
     display: grid;
@@ -82,163 +344,235 @@
     gap: 16px;
 }
 
+/* Per-card accent colours */
+.credential-card:nth-child(1) { --ca: #7C3AED; --ca10: rgba(124,58,237,0.1); --ca15: rgba(124,58,237,0.16); }
+.credential-card:nth-child(2) { --ca: #BE185D; --ca10: rgba(190,24,93,0.1);  --ca15: rgba(190,24,93,0.16);  }
+.credential-card:nth-child(3) { --ca: #C026D3; --ca10: rgba(192,38,211,0.1); --ca15: rgba(192,38,211,0.16); }
+.credential-card:nth-child(4) { --ca: #4F46E5; --ca10: rgba(79,70,229,0.1);  --ca15: rgba(79,70,229,0.16);  }
+
 .credential-card {
+    position: relative;
     background: var(--white);
     border-radius: var(--r-lg);
     padding: 28px 24px;
-    border: 1px solid rgba(124, 58, 237, 0.05);
-    transition: all var(--t-base);
-    position: relative;
+    border: 1px solid rgba(124, 58, 237, 0.06);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.32s var(--ease), box-shadow 0.32s var(--ease), border-color 0.32s;
 }
 
+/* Animated top accent bar */
 .credential-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    transform: scaleX(0);
+    background: var(--ca, var(--primary));
     transform-origin: left;
+    transform: scaleX(0.35);
+    border-radius: 0 3px 3px 0;
     transition: transform 0.4s var(--ease-spring);
 }
 
 .credential-card:hover::before { transform: scaleX(1); }
 
 .credential-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-    border-color: transparent;
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 8px 24px var(--ca10, rgba(124, 58, 237, 0.08));
+    border-color: var(--ca15, rgba(124, 58, 237, 0.14));
 }
 
-.credential-icon {
-    font-size: 2rem;
-    margin-bottom: 14px;
+.credential-card:focus-visible {
+    outline: 2px solid var(--ca, var(--primary));
+    outline-offset: 3px;
 }
 
-.credential-card h3 {
+/* Watermark number */
+.credential-num {
+    position: absolute;
+    top: 6px; right: 14px;
+    font-family: var(--font-heading);
+    font-size: 5.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ca, var(--primary));
+    opacity: 0.05;
+    letter-spacing: -3px;
+    pointer-events: none;
+    user-select: none;
+    transition: opacity 0.3s;
+}
+
+.credential-card:hover .credential-num { opacity: 0.09; }
+
+/* Icon wrap */
+.credential-icon-wrap {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: var(--ca10, rgba(124, 58, 237, 0.08));
+    border: 1px solid var(--ca15, rgba(124, 58, 237, 0.12));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ca, var(--primary));
+    margin-bottom: 18px;
+    flex-shrink: 0;
+    transition: transform 0.4s var(--ease-spring), background 0.3s;
+}
+
+.credential-card:hover .credential-icon-wrap {
+    transform: scale(1.1) rotate(-6deg);
+    background: var(--ca15, rgba(124, 58, 237, 0.14));
+}
+
+.credential-icon-wrap svg { width: 26px; height: 26px; }
+
+.credential-body { flex: 1; }
+
+.credential-body h3 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+}
+
+.credential-body p {
+    font-size: 0.83rem;
+    line-height: 1.65;
+    margin-bottom: 12px;
+}
+
+.credential-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--ca, var(--primary));
+    background: var(--ca10, rgba(124, 58, 237, 0.07));
+    border: 1px solid var(--ca15, rgba(124, 58, 237, 0.12));
+    border-radius: var(--r-full);
+    padding: 5px 12px;
+    white-space: nowrap;
+    transition: background 0.25s, border-color 0.25s;
+}
+
+.credential-card:hover .credential-tag {
+    background: var(--ca15, rgba(124, 58, 237, 0.12));
+    border-color: var(--ca, rgba(124, 58, 237, 0.22));
+}
+
+
+/* ══════════════════════════════════════════════
+   JOURNEY TIMELINE
+   ══════════════════════════════════════════════ */
+.about-journey {
+    padding: 80px 0;
+    background: var(--bg-alt);
+    position: relative;
+}
+
+.journey-track {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-left: 32px;
+}
+
+/* Vertical line */
+.journey-line {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 11px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--primary), var(--secondary));
+    border-radius: 2px;
+    opacity: 0.2;
+}
+
+.journey-step {
+    position: relative;
+    padding-bottom: 32px;
+}
+
+.journey-step:last-child { padding-bottom: 0; }
+
+/* Dot */
+.journey-dot {
+    position: absolute;
+    left: -27px; top: 6px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 3px solid var(--primary);
+    z-index: 1;
+    transition: transform 0.3s var(--ease-spring);
+}
+
+.journey-step:hover .journey-dot {
+    transform: scale(1.3);
+}
+
+.journey-dot--active {
+    background: var(--primary);
+    box-shadow: 0 0 0 5px rgba(124, 58, 237, 0.15);
+    animation: journeyPulse 2s ease-in-out infinite;
+}
+
+@keyframes journeyPulse {
+    0%, 100% { box-shadow: 0 0 0 5px rgba(124, 58, 237, 0.15); }
+    50% { box-shadow: 0 0 0 10px rgba(124, 58, 237, 0.06); }
+}
+
+/* Card */
+.journey-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    padding: 22px 20px;
+    border: 1px solid rgba(124, 58, 237, 0.06);
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.journey-step:hover .journey-card {
+    transform: translateX(6px);
+    box-shadow: 0 8px 32px rgba(124, 58, 237, 0.08);
+}
+
+.journey-year {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--primary);
+    background: rgba(124, 58, 237, 0.07);
+    border: 1px solid rgba(124, 58, 237, 0.12);
+    border-radius: var(--r-full);
+    padding: 4px 12px;
+    margin-bottom: 10px;
+}
+
+.journey-card h4 {
     font-size: 1rem;
     margin-bottom: 6px;
 }
 
-.credential-card p {
-    font-size: 0.82rem;
-    line-height: 1.6;
+.journey-card p {
+    font-size: 0.83rem;
+    line-height: 1.65;
     margin-bottom: 0;
 }
 
-
-/* ── Classes Section ────────────────────────── */
-.classes-section {
-    padding: 80px 0;
-    position: relative;
-}
-
-.classes-intro {
-    max-width: 600px;
-    margin: 0 auto 2.5rem;
-    text-align: center;
-}
-
-.classes-intro p {
-    font-size: 0.95rem;
-}
-
-.classes-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin-bottom: 2.5rem;
-}
-
-.class-item {
-    padding: 24px;
-    background: var(--white);
-    border-radius: var(--r-lg);
-    border: 1px solid rgba(124, 58, 237, 0.05);
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    transition: all var(--t-base);
-}
-
-.class-item:hover {
-    transform: translateX(6px);
-    box-shadow: var(--shadow-md);
-    border-color: rgba(124, 58, 237, 0.12);
-}
-
-.class-icon {
-    font-size: 1.5rem;
-    flex-shrink: 0;
-    width: 52px; height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(244, 114, 182, 0.06));
-    border-radius: 14px;
-}
-
-.class-info h3 {
-    font-size: 0.95rem;
-    margin-bottom: 2px;
-}
-
-.class-info p {
-    font-size: 0.82rem;
-    margin-bottom: 0;
-}
-
-/* Highlight cards */
-.highlight-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-}
-
-.highlight-card {
-    padding: 28px 20px;
-    border-radius: var(--r-lg);
-    text-align: center;
-    transition: all var(--t-base);
-}
-
-.highlight-card-purple {
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    color: var(--white);
-}
-
-.highlight-card-pink {
-    background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
-    color: var(--white);
-}
-
-.highlight-card:hover { transform: translateY(-4px); }
-
-.highlight-num {
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-.highlight-label {
-    font-size: 0.78rem;
-    opacity: 0.8;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 4px;
-}
 
 /* ═══════════════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════════════ */
 @media (min-width: 640px) {
-    .credentials-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .philosophy-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
     }
 
-    .classes-grid {
+    .credentials-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
@@ -251,7 +585,10 @@
         gap: 60px;
     }
 
-    .story-visual { max-width: 280px; }
+    .story-visual { max-width: 340px; }
+    .story-visual-panel { min-height: 380px; }
+
+    .about-philosophy { padding: 100px 0; }
 
     .credentials { padding: 100px 0; }
 
@@ -260,18 +597,347 @@
         gap: 20px;
     }
 
-    .classes-section { padding: 100px 0; }
-
-    .classes-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
+    .about-journey { padding: 100px 0; }
 }
 
 @media (max-width: 640px) {
     .story-content { text-align: center; }
 
-    .highlight-row {
-        grid-template-columns: 1fr;
+    .philosophy-grid {
+        gap: 12px;
     }
+
+    .abt-hero-stat { padding: 0 12px; }
+    .abt-hero-stat-sep { height: 24px; }
+    .abt-hero-stat-num { font-size: 1.15rem; }
+    .abt-hero-stats { padding: 12px 4px; font-weight: 700;
+    line-height: 1;
+    color: var(--primary);
+    opacity: 0.05;
+    letter-spacing: -3px;
+    pointer-events: none;
+    user-select: none;
+    transition: opacity 0.3s;
+}
+
+.philosophy-card:hover .philosophy-num { opacity: 0.09; }
+
+.philosophy-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: rgba(124, 58, 237, 0.08);
+    border: 1px solid rgba(124, 58, 237, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    margin-bottom: 16px;
+    transition: transform 0.4s var(--ease-spring), background 0.3s;
+}
+
+.philosophy-card:hover .philosophy-icon {
+    transform: scale(1.1) rotate(-6deg);
+    background: rgba(124, 58, 237, 0.14);
+}
+
+.philosophy-icon svg { width: 26px; height: 26px; }
+
+.philosophy-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.philosophy-card p {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    margin-bottom: 0;
+}
+
+
+/* ══════════════════════════════════════════════
+   CREDENTIALS — Per-card accents
+   ══════════════════════════════════════════════ */
+.credentials {
+    padding: 80px 0;
+    position: relative;
+}
+
+/* Dark bg for credentials hero text */
+.abt-cred-tag { }
+.abt-cred-title { }
+.abt-cred-desc { }
+
+.credentials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+/* Per-card accent colours */
+.credential-card:nth-child(1) { --ca: #7C3AED; --ca10: rgba(124,58,237,0.1); --ca15: rgba(124,58,237,0.16); }
+.credential-card:nth-child(2) { --ca: #BE185D; --ca10: rgba(190,24,93,0.1);  --ca15: rgba(190,24,93,0.16);  }
+.credential-card:nth-child(3) { --ca: #C026D3; --ca10: rgba(192,38,211,0.1); --ca15: rgba(192,38,211,0.16); }
+.credential-card:nth-child(4) { --ca: #4F46E5; --ca10: rgba(79,70,229,0.1);  --ca15: rgba(79,70,229,0.16);  }
+
+.credential-card {
+    position: relative;
+    background: var(--white);
+    border-radius: var(--r-lg);
+    padding: 28px 24px;
+    border: 1px solid rgba(124, 58, 237, 0.06);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.32s var(--ease), box-shadow 0.32s var(--ease), border-color 0.32s;
+}
+
+/* Animated top accent bar */
+.credential-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--ca, var(--primary));
+    transform-origin: left;
+    transform: scaleX(0.35);
+    border-radius: 0 3px 3px 0;
+    transition: transform 0.4s var(--ease-spring);
+}
+
+.credential-card:hover::before { transform: scaleX(1); }
+
+.credential-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 8px 24px var(--ca10, rgba(124, 58, 237, 0.08));
+    border-color: var(--ca15, rgba(124, 58, 237, 0.14));
+}
+
+.credential-card:focus-visible {
+    outline: 2px solid var(--ca, var(--primary));
+    outline-offset: 3px;
+}
+
+/* Watermark number */
+.credential-num {
+    position: absolute;
+    top: 6px; right: 14px;
+    font-family: var(--font-heading);
+    font-size: 5.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ca, var(--primary));
+    opacity: 0.05;
+    letter-spacing: -3px;
+    pointer-events: none;
+    user-select: none;
+    transition: opacity 0.3s;
+}
+
+.credential-card:hover .credential-num { opacity: 0.09; }
+
+/* Icon wrap */
+.credential-icon-wrap {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: var(--ca10, rgba(124, 58, 237, 0.08));
+    border: 1px solid var(--ca15, rgba(124, 58, 237, 0.12));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ca, var(--primary));
+    margin-bottom: 18px;
+    flex-shrink: 0;
+    transition: transform 0.4s var(--ease-spring), background 0.3s;
+}
+
+.credential-card:hover .credential-icon-wrap {
+    transform: scale(1.1) rotate(-6deg);
+    background: var(--ca15, rgba(124, 58, 237, 0.14));
+}
+
+.credential-icon-wrap svg { width: 26px; height: 26px; }
+
+.credential-body { flex: 1; }
+
+.credential-body h3 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+}
+
+.credential-body p {
+    font-size: 0.83rem;
+    line-height: 1.65;
+    margin-bottom: 12px;
+}
+
+.credential-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--ca, var(--primary));
+    background: var(--ca10, rgba(124, 58, 237, 0.07));
+    border: 1px solid var(--ca15, rgba(124, 58, 237, 0.12));
+    border-radius: var(--r-full);
+    padding: 5px 12px;
+    white-space: nowrap;
+    transition: background 0.25s, border-color 0.25s;
+}
+
+.credential-card:hover .credential-tag {
+    background: var(--ca15, rgba(124, 58, 237, 0.12));
+    border-color: var(--ca, rgba(124, 58, 237, 0.22));
+}
+
+
+/* ══════════════════════════════════════════════
+   JOURNEY TIMELINE
+   ══════════════════════════════════════════════ */
+.about-journey {
+    padding: 80px 0;
+    background: var(--bg-alt);
+    position: relative;
+}
+
+.journey-track {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-left: 32px;
+}
+
+/* Vertical line */
+.journey-line {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 11px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--primary), var(--secondary));
+    border-radius: 2px;
+    opacity: 0.2;
+}
+
+.journey-step {
+    position: relative;
+    padding-bottom: 32px;
+}
+
+.journey-step:last-child { padding-bottom: 0; }
+
+/* Dot */
+.journey-dot {
+    position: absolute;
+    left: -27px; top: 6px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 3px solid var(--primary);
+    z-index: 1;
+    transition: transform 0.3s var(--ease-spring);
+}
+
+.journey-step:hover .journey-dot {
+    transform: scale(1.3);
+}
+
+.journey-dot--active {
+    background: var(--primary);
+    box-shadow: 0 0 0 5px rgba(124, 58, 237, 0.15);
+    animation: journeyPulse 2s ease-in-out infinite;
+}
+
+@keyframes journeyPulse {
+    0%, 100% { box-shadow: 0 0 0 5px rgba(124, 58, 237, 0.15); }
+    50% { box-shadow: 0 0 0 10px rgba(124, 58, 237, 0.06); }
+}
+
+/* Card */
+.journey-card {
+    background: var(--white);
+    border-radius: var(--r-lg);
+    padding: 22px 20px;
+    border: 1px solid rgba(124, 58, 237, 0.06);
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.journey-step:hover .journey-card {
+    transform: translateX(6px);
+    box-shadow: 0 8px 32px rgba(124, 58, 237, 0.08);
+}
+
+.journey-year {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--primary);
+    background: rgba(124, 58, 237, 0.07);
+    border: 1px solid rgba(124, 58, 237, 0.12);
+    border-radius: var(--r-full);
+    padding: 4px 12px;
+    margin-bottom: 10px;
+}
+
+.journey-card h4 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+}
+
+.journey-card p {
+    font-size: 0.83rem;
+    line-height: 1.65;
+    margin-bottom: 0;
+}
+
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════ */
+@media (min-width: 640px) {
+    .philosophy-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .credentials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .about-story { padding: 100px 0; }
+
+    .about-story-grid {
+        grid-template-columns: 1fr 1.3fr;
+        gap: 60px;
+    }
+
+    .story-visual { max-width: 340px; }
+    .story-visual-panel { min-height: 380px; }
+
+    .about-philosophy { padding: 100px 0; }
+
+    .credentials { padding: 100px 0; }
+
+    .credentials-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+    .about-journey { padding: 100px 0; }
+}
+
+@media (max-width: 640px) {
+    .story-content { text-align: center; }
+
+    .philosophy-grid {
+        gap: 12px;
+    }
+
+    .abt-hero-stat { padding: 0 12px; }
+    .abt-hero-stat-sep { height: 24px; }
+    .abt-hero-stat-num { font-size: 1.15rem; }
+    .abt-hero-stats { padding: 12px 4px; }
 }

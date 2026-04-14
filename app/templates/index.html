@@ -1,5 +1,115 @@
 {% extends "base.html" %}
-{% block title %}{{ site.owner }} — {{ site.name }}{% endblock %}
+{% block title %}{{ site.name }} — Best Ladies Beauty Parlour in Airoli, Navi Mumbai | {{ site.owner }}{% endblock %}
+{% block meta_description %}{{ site.name }} by {{ site.owner }} — Top-rated ladies beauty parlour in Airoli, Navi Mumbai. Bridal makeup, skin treatment, hair care, laser, nail art & beauty classes. VLCC, Lakme, Jawed Habib trained. {{ site.rating }}★ Google rating. Book on WhatsApp!{% endblock %}
+{% block meta_keywords %}beauty parlour airoli, ladies beauty parlour navi mumbai, best beauty parlour mumbai, bridal makeup airoli, hair salon navi mumbai, skin treatment airoli, nail art navi mumbai, beauty classes navi mumbai, laser hair removal navi mumbai, makeup artist airoli, {{ site.owner }}, lookwell parlour, beauty parlour near me, ladies salon airoli, facial treatment navi mumbai, waxing airoli, mehndi artist navi mumbai{% endblock %}
+{% block canonical %}{{ site.site_url }}/{% endblock %}
+{% block og_title %}{{ site.name }} — Best Ladies Beauty Parlour in Airoli, Navi Mumbai{% endblock %}
+{% block og_description %}Top-rated ladies beauty parlour by {{ site.owner }} in Airoli. Bridal makeup, skin care, hair, nail art & more. {{ site.rating }}★ Google rated. Book now!{% endblock %}
+{% block og_url %}{{ site.site_url }}/{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "{{ site.site_url }}/#localbusiness",
+    "name": "{{ site.name }}",
+    "alternateName": "Lookwell Parlour",
+    "description": "Professional ladies beauty parlour in Airoli, Navi Mumbai offering bridal makeup, skin treatment, hair care, laser treatment, nail art, waxing & beauty classes. Run by {{ site.owner }}, trained at VLCC, Jawed Habib, Lakme & ICAN.",
+    "url": "{{ site.site_url }}",
+    "telephone": "{{ site.phone_primary }}",
+    "image": "{{ site.site_url }}{{ site.og_image }}",
+    "priceRange": "{{ site.price_range }}",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "AL-1/431, Ramdev Apt, Sector 16, Behind Radhika Bai School",
+        "addressLocality": "Airoli, Navi Mumbai",
+        "addressRegion": "Maharashtra",
+        "postalCode": "400708",
+        "addressCountry": "IN"
+    },
+    "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": {{ site.coordinates.lat }},
+        "longitude": {{ site.coordinates.lng }}
+    },
+    "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "10:00",
+        "closes": "20:00"
+    },
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{ site.rating }}",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "{{ site.review_count }}"
+    },
+    "founder": {
+        "@type": "Person",
+        "name": "{{ site.owner }}",
+        "jobTitle": "{{ site.owner_title }}"
+    },
+    "areaServed": [
+        {"@type": "City", "name": "Navi Mumbai"},
+        {"@type": "City", "name": "Mumbai"},
+        {"@type": "Place", "name": "Airoli"},
+        {"@type": "Place", "name": "Ghansoli"},
+        {"@type": "Place", "name": "Vashi"},
+        {"@type": "Place", "name": "Kopar Khairane"},
+        {"@type": "Place", "name": "Thane"}
+    ],
+    "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Beauty Services",
+        "itemListElement": [
+            {% for svc in site.services %}
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "{{ svc.title }}",
+                    "description": "{{ svc.description }}"
+                }
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ]
+    },
+    "sameAs": [
+        "{{ site.social.facebook }}",
+        "{{ site.social.instagram }}"
+    ]
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "{{ site.name }}",
+    "url": "{{ site.site_url }}",
+    "description": "Professional ladies beauty parlour in Airoli, Navi Mumbai",
+    "publisher": {
+        "@type": "LocalBusiness",
+        "name": "{{ site.name }}"
+    }
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "{{ site.site_url }}/"
+        }
+    ]
+}
+</script>
+{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="/static/css/index.css">
@@ -8,12 +118,12 @@
 {% block content %}
 
 <!-- ═══════════════ HERO ═══════════════ -->
-<section class="hero" id="hero">
-    <canvas id="heroCanvas"></canvas>
+<section class="hero" id="hero" aria-label="Welcome to {{ site.name }}">
+    <canvas id="heroCanvas" aria-hidden="true"></canvas>
     <div class="hero-overlay"></div>
 
     <!-- Floating particles layer -->
-    <div class="hero-particles" id="heroParticles"></div>
+    <div class="hero-particles" id="heroParticles" aria-hidden="true"></div>
 
     <div class="hero-content">
         <div class="hero-badge">
@@ -33,7 +143,7 @@
         <div class="hero-actions">
             <a href="{{ site.whatsapp_url }}"
                target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg btn-glow">
-                <span class="btn-icon">💬</span> Book Appointment
+                <span class="btn-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span> Book Appointment
             </a>
             <a href="/services" class="btn btn-outline btn-lg btn-glass">
                 Explore Services <span class="btn-arrow">→</span>
@@ -65,11 +175,11 @@
 <div class="marquee-strip">
     <div class="marquee-track">
         {% for svc in site.services %}
-        <span class="marquee-item">{{ svc.icon }} {{ svc.title }}</span>
+        <span class="marquee-item">{{ svc.icon | safe }} {{ svc.title }}</span>
         <span class="marquee-dot">✦</span>
         {% endfor %}
         {% for svc in site.services %}
-        <span class="marquee-item">{{ svc.icon }} {{ svc.title }}</span>
+        <span class="marquee-item">{{ svc.icon | safe }} {{ svc.title }}</span>
         <span class="marquee-dot">✦</span>
         {% endfor %}
     </div>
@@ -91,7 +201,7 @@
             <a href="/services#{{ svc.id }}" class="svc-tile anim-fade-up">
                 <div class="svc-tile-accent"></div>
                 <div class="svc-tile-top">
-                    <div class="svc-tile-icon">{{ svc.icon }}</div>
+                    <div class="svc-tile-icon-wrap">{{ svc.icon | safe }}</div>
                     <span class="svc-tile-count">{{ svc['items'] | length }} treatments</span>
                 </div>
                 <div class="svc-tile-body">
@@ -103,11 +213,21 @@
                 </div>
             </a>
             {% endfor %}
+
+            <!-- 8th tile: View All Services -->
+            <a href="/services" class="svc-tile svc-tile--all anim-fade-up">
+                <div class="svc-tile-all-inner">
+                    <span class="svc-tile-all-title">View All<br>Services</span>
+                    <span class="svc-tile-all-cta">
+                        Explore
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </span>
+                </div>
+            </a>
         </div>
 
         <div class="svc-strip-bottom anim-fade-up">
             <p class="svc-strip-note">✦ Walk-ins welcome · By appointment preferred</p>
-            <a href="/services" class="btn btn-primary">View All Services →</a>
         </div>
     </div>
 </section>
@@ -118,10 +238,13 @@
     <div class="container about-teaser-grid">
         <div class="about-teaser-visual anim-fade-right">
             <div class="about-photo-frame">
-                <div class="about-photo-placeholder">
-                    <span class="placeholder-icon">✨</span>
-                    <span>Arathi Dsouza</span>
-                </div>
+                <img
+                    src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=480&h=640&fit=crop&auto=format&q=80"
+                    alt="{{ site.owner }} providing professional beauty services at {{ site.name }}, Airoli, Navi Mumbai"
+                    class="about-photo-img"
+                    width="480"
+                    height="640"
+                    loading="lazy">
                 <div class="geo-deco geo-tri"></div>
                 <div class="geo-deco geo-circle"></div>
                 <div class="geo-deco geo-ring"></div>
@@ -139,7 +262,7 @@
             <div class="training-badges">
                 {% for t in site.training %}
                 <div class="badge glass-card-light">
-                    <span class="badge-icon">{{ t.icon }}</span>
+                    <span class="badge-icon">{{ t.icon | safe }}</span>
                     <span class="badge-name">{{ t.name }}</span>
                 </div>
                 {% endfor %}
@@ -191,14 +314,14 @@
                 <h2 class="section-title">Visit Our <em>Parlour</em></h2>
                 <div class="map-details">
                     <div class="map-detail">
-                        <span class="detail-icon">📍</span>
+                        <span class="detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
                         <div>
                             <strong>Address</strong>
                             <p>{{ site.address }}</p>
                         </div>
                     </div>
                     <div class="map-detail">
-                        <span class="detail-icon">📞</span>
+                        <span class="detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
                         <div>
                             <strong>Phone</strong>
                             <p><a href="tel:{{ site.phone_primary }}">{{ site.phone_primary }}</a></p>
@@ -206,27 +329,51 @@
                         </div>
                     </div>
                     <div class="map-detail">
-                        <span class="detail-icon">💬</span>
+                        <span class="detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
                         <div>
                             <strong>WhatsApp</strong>
                             <p><a href="https://wa.me/{{ site.whatsapp_number }}" target="_blank" rel="noopener noreferrer">Chat with us</a></p>
                         </div>
                     </div>
                     <div class="map-detail">
-                        <span class="detail-icon">🕐</span>
+                        <span class="detail-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
                         <div>
                             <strong>Hours</strong>
-                            <p>Mon - Sun: 10:00 AM — 8:00 PM</p>
+                            <p>{{ site.hours_display }}</p>
                         </div>
                     </div>
                 </div>
                 <a href="{{ site.google_maps_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                    📍 Get Directions
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Get Directions
                 </a>
             </div>
             <div class="map-container anim-fade-left">
                 <div id="map"></div>
             </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════ INSTAGRAM CTA ═══════════════ -->
+<section class="insta-cta">
+    <div class="container">
+        <div class="insta-cta-card anim-fade-up">
+            <div class="insta-cta-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                </svg>
+            </div>
+            <div class="insta-cta-text">
+                <h3>Follow Our Work on Instagram</h3>
+                <p>See real transformations, bridal looks, nail art &amp; more — straight from the parlour.</p>
+                <span class="insta-cta-handle">@lookwell_parlour</span>
+            </div>
+            <a href="https://www.instagram.com/lookwell_parlour/"
+               target="_blank" rel="noopener noreferrer"
+               class="btn btn-primary">
+                Follow Us
+            </a>
         </div>
     </div>
 </section>
@@ -240,7 +387,7 @@
             <p class="anim-fade-up">Book your appointment today and experience the Lookwell difference.</p>
             <a href="{{ site.whatsapp_url }}"
                target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg anim-fade-up">
-                💬 Book on WhatsApp
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Book on WhatsApp
             </a>
         </div>
     </div>

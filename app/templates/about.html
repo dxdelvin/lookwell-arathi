@@ -1,6 +1,56 @@
 {% extends "base.html" %}
-{% block title %}About {{ site.owner }} — {{ site.name }}{% endblock %}
-{% block meta_description %}Meet {{ site.owner }}, the beauty expert behind {{ site.name }}. Professionally trained at VLCC, Jawed Habib, Lakme & ICAN.{% endblock %}
+{% set _cred_accents = ['#7C3AED','#BE185D','#C026D3','#4F46E5'] %}
+{% block title %}About {{ site.owner }} — {{ site.name }} | Professional Beauty Expert in Airoli{% endblock %}
+{% block meta_description %}Meet {{ site.owner }}, the professional beauty expert behind {{ site.name }} in Airoli, Navi Mumbai. Trained at VLCC, Jawed Habib, Lakme & ICAN with {{ site.years_experience }}+ years of experience. Learn about her journey.{% endblock %}
+{% block meta_keywords %}{{ site.owner }}, beauty expert airoli, makeup artist navi mumbai, VLCC trained beautician, Lakme certified, Jawed Habib trained, beauty professional mumbai, lookwell parlour owner, best beautician airoli{% endblock %}
+{% block canonical %}{{ site.site_url }}/about{% endblock %}
+{% block og_title %}About {{ site.owner }} — {{ site.name }}{% endblock %}
+{% block og_description %}Meet {{ site.owner }}, professionally trained beauty expert in Airoli, Navi Mumbai. VLCC, Jawed Habib, Lakme & ICAN certified with {{ site.years_experience }}+ years experience.{% endblock %}
+{% block og_url %}{{ site.site_url }}/about{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "mainEntity": {
+        "@type": "Person",
+        "name": "{{ site.owner }}",
+        "jobTitle": "{{ site.owner_title }}",
+        "description": "Professional beauty expert with {{ site.years_experience }}+ years of experience. Trained at VLCC, Jawed Habib, Lakme and ICAN. Founder of {{ site.name }} in Airoli, Navi Mumbai.",
+        "worksFor": {
+            "@type": "LocalBusiness",
+            "name": "{{ site.name }}",
+            "url": "{{ site.site_url }}"
+        },
+        "knowsAbout": ["Bridal Makeup", "Skin Treatment", "Hair Care", "Laser Treatment", "Nail Art", "Aesthetic Treatments", "Waxing & Threading"],
+        "alumniOf": [
+            {"@type": "Organization", "name": "VLCC"},
+            {"@type": "Organization", "name": "Jawed Habib Academy"},
+            {"@type": "Organization", "name": "Lakme Academy"},
+            {"@type": "Organization", "name": "ICAN"}
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Airoli, Navi Mumbai",
+            "addressRegion": "Maharashtra",
+            "postalCode": "400708",
+            "addressCountry": "IN"
+        }
+    }
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.site_url }}/"},
+        {"@type": "ListItem", "position": 2, "name": "About", "item": "{{ site.site_url }}/about"}
+    ]
+}
+</script>
+{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="/static/css/about.css">
@@ -10,12 +60,29 @@
 
 <!-- ═══════════════ ABOUT HERO ═══════════════ -->
 <section class="page-hero about-hero">
-    <div class="deco deco-blob" style="width:160px;height:160px;background:var(--primary);top:-40px;right:-40px;opacity:0.06;"></div>
-    <div class="deco deco-float" style="width:80px;height:80px;border:3px solid var(--secondary);border-radius:50%;bottom:20%;left:5%;opacity:0.08;"></div>
-    <div class="container">
-        <span class="section-tag anim-fade-up">About</span>
-        <h1 class="page-hero-title anim-fade-up">Meet <em>{{ site.owner }}</em></h1>
-        <p class="page-hero-desc anim-fade-up">The passion, the skill, the person behind every transformation at Lookwell.</p>
+    <div class="abt-orb abt-orb-1"></div>
+    <div class="abt-orb abt-orb-2"></div>
+    <div class="abt-orb abt-orb-3"></div>
+    <div class="container abt-hero-inner">
+        <span class="section-tag abt-hero-tag anim-fade-up">About</span>
+        <h1 class="abt-hero-heading anim-fade-up">Meet <em>{{ site.owner }}</em></h1>
+        <p class="abt-hero-sub anim-fade-up">The passion, the skill, the person behind every transformation at Lookwell.</p>
+        <div class="abt-hero-stats anim-fade-up">
+            <div class="abt-hero-stat">
+                <span class="abt-hero-stat-num">{{ site.years_experience }}+</span>
+                <span class="abt-hero-stat-label">Years Experience</span>
+            </div>
+            <span class="abt-hero-stat-sep"></span>
+            <div class="abt-hero-stat">
+                <span class="abt-hero-stat-num">4</span>
+                <span class="abt-hero-stat-label">Certifications</span>
+            </div>
+            <span class="abt-hero-stat-sep"></span>
+            <div class="abt-hero-stat">
+                <span class="abt-hero-stat-num">10K+</span>
+                <span class="abt-hero-stat-label">Happy Clients</span>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -24,15 +91,19 @@
 <section class="about-story">
     <div class="container about-story-grid">
         <div class="story-visual anim-fade-right">
-            <div class="experience-badge">
-                <span class="badge-number">{{ site.years_experience }}+</span>
-                <span class="badge-text">Years</span>
-                <span class="badge-sub">of beauty expertise</span>
+            <div class="story-visual-panel">
+                <div class="story-visual-orb story-visual-orb-1"></div>
+                <div class="story-visual-orb story-visual-orb-2"></div>
+                <div class="experience-badge">
+                    <span class="badge-number">{{ site.years_experience }}+</span>
+                    <span class="badge-text">Years</span>
+                    <span class="badge-sub">of beauty expertise</span>
+                </div>
+                <span class="story-visual-quote">"Beauty is my passion"</span>
             </div>
-            <div class="geo-deco geo-tri" style="top:-14px;right:-14px;"></div>
-            <div class="geo-deco geo-circle" style="bottom:10%;left:-18px;"></div>
         </div>
         <div class="story-content anim-fade-left">
+            <span class="section-tag">My Story</span>
             <h2 class="section-title">My Journey in Beauty</h2>
             <p>
                 Beauty has always been more than a profession for me — it's a passion that started early
@@ -55,34 +126,142 @@
 </section>
 
 
+<!-- ═══════════════ PHILOSOPHY ═══════════════ -->
+<section class="about-philosophy">
+    <div class="container">
+        <div class="section-header anim-fade-up">
+            <span class="section-tag">Philosophy</span>
+            <h2 class="section-title">The Lookwell Approach</h2>
+            <p class="section-desc">Three pillars that define every experience at our studio.</p>
+        </div>
+        <div class="philosophy-grid">
+            <div class="philosophy-card anim-fade-up">
+                <div class="philosophy-num">01</div>
+                <div class="philosophy-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </div>
+                <h3>Personal Attention</h3>
+                <p>Every client gets my undivided focus. I listen, understand your vision, and craft a plan uniquely for you.</p>
+            </div>
+            <div class="philosophy-card anim-fade-up">
+                <div class="philosophy-num">02</div>
+                <div class="philosophy-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><path d="M5 3v4M19 17v4M3 5h4M17 19h4"/></svg>
+                </div>
+                <h3>Expert Techniques</h3>
+                <p>Trained at VLCC, Jawed Habib, Lakme & ICAN — I bring world-class skills to every session.</p>
+            </div>
+            <div class="philosophy-card anim-fade-up">
+                <div class="philosophy-num">03</div>
+                <div class="philosophy-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
+                </div>
+                <h3>Premium Quality</h3>
+                <p>Only the finest, skin-safe products and hygienic tools — because you deserve nothing less.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 <!-- ═══════════════ CREDENTIALS ═══════════════ -->
 <section class="credentials">
     <div class="container">
         <div class="section-header anim-fade-up">
-            <span class="section-tag">Credentials</span>
-            <h2 class="section-title">Professionally Trained</h2>
-            <p class="section-desc">Certified and trained at India's most respected beauty institutions.</p>
+            <span class="section-tag abt-cred-tag">Credentials</span>
+            <h2 class="section-title abt-cred-title">Professionally <em>Trained</em></h2>
+            <p class="section-desc abt-cred-desc">Certified and trained at India's most respected beauty institutions.</p>
         </div>
         <div class="credentials-grid">
             <div class="credential-card anim-fade-up">
-                <div class="credential-icon">🏅</div>
-                <h3>VLCC</h3>
-                <p>Advanced beauty therapy and skin care certification from India's leading wellness brand.</p>
+                <div class="credential-num">01</div>
+                <div class="credential-icon-wrap">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                </div>
+                <div class="credential-body">
+                    <h3>VLCC</h3>
+                    <p>Advanced beauty therapy and skin care certification from India's leading wellness brand.</p>
+                    <span class="credential-tag">Skin & Wellness</span>
+                </div>
             </div>
             <div class="credential-card anim-fade-up">
-                <div class="credential-icon">✂️</div>
-                <h3>Jawed Habib</h3>
-                <p>Professional hair styling, cutting, and coloring techniques from the legendary hair maestro's academy.</p>
+                <div class="credential-num">02</div>
+                <div class="credential-icon-wrap">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>
+                </div>
+                <div class="credential-body">
+                    <h3>Jawed Habib</h3>
+                    <p>Professional hair styling, cutting, and coloring techniques from the legendary hair maestro's academy.</p>
+                    <span class="credential-tag">Hair Mastery</span>
+                </div>
             </div>
             <div class="credential-card anim-fade-up">
-                <div class="credential-icon">💄</div>
-                <h3>Lakme</h3>
-                <p>Makeup artistry and bridal styling from Lakme Academy — the gold standard in Indian beauty education.</p>
+                <div class="credential-num">03</div>
+                <div class="credential-icon-wrap">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.65-.75 1.65-1.69 0-.44-.18-.83-.44-1.12-.29-.3-.44-.66-.44-1.13 0-.92.75-1.67 1.67-1.67H17c3.04 0 5.56-2.5 5.56-5.56C22 6.01 17.5 2 12 2z"/></svg>
+                </div>
+                <div class="credential-body">
+                    <h3>Lakme</h3>
+                    <p>Makeup artistry and bridal styling from Lakme Academy — the gold standard in Indian beauty education.</p>
+                    <span class="credential-tag">Makeup Artistry</span>
+                </div>
             </div>
             <div class="credential-card anim-fade-up">
-                <div class="credential-icon">🎓</div>
-                <h3>ICAN</h3>
-                <p>International certification covering advanced aesthetic treatments and modern beauty techniques.</p>
+                <div class="credential-num">04</div>
+                <div class="credential-icon-wrap">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 6 3 6 3s3 0 6-3v-5"/></svg>
+                </div>
+                <div class="credential-body">
+                    <h3>ICAN</h3>
+                    <p>International certification covering advanced aesthetic treatments and modern beauty techniques.</p>
+                    <span class="credential-tag">Aesthetic Expert</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ═══════════════ JOURNEY TIMELINE ═══════════════ -->
+<section class="about-journey">
+    <div class="container">
+        <div class="section-header anim-fade-up">
+            <span class="section-tag">Journey</span>
+            <h2 class="section-title">A Path of <em>Growth</em></h2>
+        </div>
+        <div class="journey-track">
+            <div class="journey-line"></div>
+            <div class="journey-step anim-fade-up">
+                <div class="journey-dot"></div>
+                <div class="journey-card">
+                    <span class="journey-year">Early Years</span>
+                    <h4>Discovered a Passion</h4>
+                    <p>Fell in love with the art of beauty — a calling that would shape an entire career.</p>
+                </div>
+            </div>
+            <div class="journey-step anim-fade-up">
+                <div class="journey-dot"></div>
+                <div class="journey-card">
+                    <span class="journey-year">Training</span>
+                    <h4>Mastering the Craft</h4>
+                    <p>Trained and certified at VLCC, Jawed Habib, Lakme & ICAN — India's best institutions.</p>
+                </div>
+            </div>
+            <div class="journey-step anim-fade-up">
+                <div class="journey-dot"></div>
+                <div class="journey-card">
+                    <span class="journey-year">The Beginning</span>
+                    <h4>Lookwell Was Born</h4>
+                    <p>Opened Lookwell Ladies Beauty Parlour in Airoli to bring world-class beauty to the community.</p>
+                </div>
+            </div>
+            <div class="journey-step anim-fade-up">
+                <div class="journey-dot journey-dot--active"></div>
+                <div class="journey-card">
+                    <span class="journey-year">Today</span>
+                    <h4>{{ site.years_experience }}+ Years &amp; Growing</h4>
+                    <p>10,000+ happy clients, {{ site.services | length }} service categories, and a reputation built on trust and expertise.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -96,8 +275,9 @@
             <h2 class="anim-fade-up">Let's Create Something <em>Beautiful</em></h2>
             <p class="anim-fade-up">Book your appointment today and experience the Lookwell difference.</p>
             <a href="{{ site.whatsapp_url }}"
-               target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg anim-fade-up">
-                💬 Book on WhatsApp
+               target="_blank" rel="noopener noreferrer" class="btn btn-glass btn-lg anim-fade-up">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Book on WhatsApp
             </a>
         </div>
     </div>

@@ -63,7 +63,8 @@
 
     /* Fonts */
     --font-heading: 'Playfair Display', Georgia, serif;
-    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-brand: 'Cormorant Garamond', Georgia, serif;
     --font-script: 'Dancing Script', cursive;
 }
 
@@ -216,7 +217,19 @@ p {
 
 .btn-lg { padding: 16px 36px; font-size: 1rem; }
 .btn-sm { padding: 10px 22px; font-size: 0.82rem; }
-.btn-icon { font-size: 1.1rem; }
+.btn-icon {
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.btn svg {
+    vertical-align: -3px;
+}
 .btn-arrow { transition: transform var(--t-base); }
 .btn:hover .btn-arrow { transform: translateX(4px); }
 

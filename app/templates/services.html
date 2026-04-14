@@ -1,6 +1,61 @@
 {% extends "base.html" %}
-{% block title %}Services — {{ site.name }}{% endblock %}
-{% block meta_description %}Explore our beauty services: Skin Treatment, Hair Care, Laser, Makeup, Nail Art & more at {{ site.name }}, Airoli.{% endblock %}
+{% set _card_accents = ['#7C3AED','#9333EA','#6D28D9','#BE185D','#C026D3','#4F46E5','#A21CAF'] %}
+{% block title %}Beauty Services — {{ site.name }} | Skin, Hair, Makeup, Nail Art in Airoli{% endblock %}
+{% block meta_description %}Explore {{ site.services | length }}+ professional beauty services at {{ site.name }}, Airoli: skin treatment, hair care, laser, bridal makeup, nail art, waxing & more. Walk-ins welcome. Book on WhatsApp!{% endblock %}
+{% block meta_keywords %}beauty services airoli, skin treatment navi mumbai, hair care airoli, laser treatment navi mumbai, bridal makeup airoli, nail art navi mumbai, waxing airoli, facial navi mumbai, beauty treatments mumbai, lookwell services, hair colour airoli, threading navi mumbai{% endblock %}
+{% block canonical %}{{ site.site_url }}/services{% endblock %}
+{% block og_title %}Beauty Services at {{ site.name }} — Airoli, Navi Mumbai{% endblock %}
+{% block og_description %}{{ site.services | length }}+ professional beauty services: skin treatment, hair care, laser, makeup, nail art & more at {{ site.name }}, Airoli.{% endblock %}
+{% block og_url %}{{ site.site_url }}/services{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Beauty Services at {{ site.name }}",
+    "description": "Professional beauty services offered at {{ site.name }}, Airoli, Navi Mumbai",
+    "numberOfItems": {{ site.services | length }},
+    "itemListElement": [
+        {% for svc in site.services %}
+        {
+            "@type": "ListItem",
+            "position": {{ loop.index }},
+            "item": {
+                "@type": "Service",
+                "name": "{{ svc.title }}",
+                "description": "{{ svc.description }}",
+                "provider": {
+                    "@type": "LocalBusiness",
+                    "name": "{{ site.name }}",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Airoli, Navi Mumbai",
+                        "addressRegion": "Maharashtra",
+                        "addressCountry": "IN"
+                    }
+                },
+                "areaServed": {
+                    "@type": "City",
+                    "name": "Navi Mumbai"
+                }
+            }
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ]
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.site_url }}/"},
+        {"@type": "ListItem", "position": 2, "name": "Services", "item": "{{ site.site_url }}/services"}
+    ]
+}
+</script>
+{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="/static/css/services.css">
@@ -10,40 +65,103 @@
 
 <!-- ═══════════════ SERVICES HERO ═══════════════ -->
 <section class="page-hero services-hero">
-    <div class="svc-hero-orb svc-hero-orb-1"></div>
-    <div class="svc-hero-orb svc-hero-orb-2"></div>
-    <div class="container">
-        <span class="section-tag anim-fade-up">What We Offer</span>
-        <h1 class="page-hero-title anim-fade-up">Our <em>Services</em></h1>
-        <p class="page-hero-desc anim-fade-up">{{ site.owner }} brings {{ site.years_experience }}+ years of professional expertise to every treatment — tailored for you, every time.</p>
-        <p class="svc-hero-hint anim-fade-up">✦ Tap any service card to see full details &amp; book instantly</p>
+    <div class="svc-orb svc-orb-1"></div>
+    <div class="svc-orb svc-orb-2"></div>
+    <div class="svc-orb svc-orb-3"></div>
+    <div class="container svc-hero-inner">
+        <span class="section-tag svc-hero-tag anim-fade-up">What We Offer</span>
+        <h1 class="svc-hero-heading anim-fade-up">Expert Beauty<br><em>Services</em></h1>
+        <p class="svc-hero-sub anim-fade-up">{{ site.owner }} brings {{ site.years_experience }}+ years of expertise to every session — tailored precisely for you.</p>
+        <div class="svc-hero-stats anim-fade-up">
+            <div class="svc-hero-stat">
+                <span class="svc-hero-stat-num">{{ site.services | length }}</span>
+                <span class="svc-hero-stat-label">Categories</span>
+            </div>
+            <span class="svc-hero-stat-sep"></span>
+            <div class="svc-hero-stat">
+                <span class="svc-hero-stat-num">{{ site.years_experience }}+</span>
+                <span class="svc-hero-stat-label">Years Experience</span>
+            </div>
+            <span class="svc-hero-stat-sep"></span>
+            <div class="svc-hero-stat">
+                <span class="svc-hero-stat-num">Walk-ins</span>
+                <span class="svc-hero-stat-label">Always Welcome</span>
+            </div>
+        </div>
+        <p class="svc-hero-hint anim-fade-up">✦ Tap any service to see full details &amp; book</p>
     </div>
 </section>
 
 
 <!-- ═══════════════ SERVICE CARDS ═══════════════ -->
-<section class="services-main">
+<section class="svc-list">
     <div class="container">
 
-        <div class="svc-cards-grid">
+        <div class="svc-grid">
         {% for svc in site.services %}
+        {% set _accent = _card_accents[loop.index0 % _card_accents|length] %}
+
+        {% if loop.first %}
+        <!-- ── Featured Card (first) ── -->
+        <div class="svc-card svc-card--featured anim-fade-up"
+             role="button" tabindex="0"
+             id="{{ svc.id }}"
+             data-id="{{ svc.id }}"
+             data-title="{{ svc.title }}"
+             data-description="{{ svc.long_description }}"
+             data-highlights="{{ svc['highlights'] | join('||') }}"
+             data-items="{{ svc['items'] | join('||') }}"
+             data-photo="{{ svc.photo }}"
+             data-accent="{{ _accent }}"
+             onclick="openServiceModal(this)"
+             onkeydown="if(event.key==='Enter'||event.key===' ')openServiceModal(this)">
+
+            <div class="svc-featured-visual">
+                <div class="svc-card-num">01</div>
+                <div class="svc-card-icon">{{ svc.icon | safe }}</div>
+                <span class="svc-featured-count">{{ svc['items'] | length }} treatments</span>
+            </div>
+
+            <div class="svc-featured-body">
+                <span class="svc-card-count">Featured Service</span>
+                <h3 class="svc-card-title">{{ svc.title }}</h3>
+                <p class="svc-card-desc">{{ svc.description }}</p>
+                <div class="svc-card-tags">
+                    {% for item in svc['items'] %}
+                    <span class="svc-card-tag">{{ item }}</span>
+                    {% endfor %}
+                </div>
+                <div class="svc-card-foot">
+                    <span class="svc-card-cta">
+                        Explore Service
+                        <span class="svc-arrow">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        {% else %}
+        <!-- ── Regular Card ── -->
         <div class="svc-card anim-fade-up"
              role="button" tabindex="0"
              id="{{ svc.id }}"
              data-id="{{ svc.id }}"
              data-title="{{ svc.title }}"
-             data-icon="{{ svc.icon }}"
              data-description="{{ svc.long_description }}"
              data-highlights="{{ svc['highlights'] | join('||') }}"
              data-items="{{ svc['items'] | join('||') }}"
              data-photo="{{ svc.photo }}"
+             data-accent="{{ _accent }}"
              onclick="openServiceModal(this)"
              onkeydown="if(event.key==='Enter'||event.key===' ')openServiceModal(this)">
 
-            <div class="svc-card-head">
-                <div class="svc-card-icon-wrap">{{ svc.icon }}</div>
+            <div class="svc-card-num">{{ "%02d"|format(loop.index) }}</div>
+
+            <div class="svc-card-top">
+                <div class="svc-card-icon">{{ svc.icon | safe }}</div>
                 <span class="svc-card-count">{{ svc['items'] | length }} treatments</span>
-                <div class="svc-card-head-orb"></div>
             </div>
 
             <div class="svc-card-body">
@@ -56,19 +174,29 @@
                 </div>
             </div>
 
-            <div class="svc-card-footer">
-                <span class="svc-card-cta">View Details <span class="svc-card-arrow">→</span></span>
+            <div class="svc-card-foot">
+                <span class="svc-card-cta">
+                    View Details
+                    <span class="svc-arrow">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </span>
+                </span>
             </div>
         </div>
+        {% endif %}
+
         {% endfor %}
         </div>
 
-        <div class="svc-custom-cta anim-fade-up">
-            <div class="svc-custom-cta-inner">
-                <div class="svc-custom-cta-icon">💬</div>
-                <div class="svc-custom-cta-text">
+        <!-- Consultation CTA -->
+        <div class="svc-consult-cta anim-fade-up">
+            <div class="svc-consult-cta-inner">
+                <div class="svc-consult-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                </div>
+                <div class="svc-consult-text">
                     <h3>Not sure which service is right for you?</h3>
-                    <p>Chat with Arathi directly — she'll suggest the perfect treatment for your needs.</p>
+                    <p>Chat with Arathi directly — she'll suggest the perfect treatment.</p>
                 </div>
                 <a href="{{ site.whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
                     Ask Arathi
@@ -80,51 +208,59 @@
 </section>
 
 
-<!-- ═══════════════ SERVICE DETAIL MODAL ═══════════════ -->
-<div class="svc-modal-backdrop" id="svcModalBackdrop" onclick="closeServiceModal()"></div>
-<div class="svc-modal" id="svcModal" role="dialog" aria-modal="true" aria-labelledby="svcModalTitle">
-    <button class="svc-modal-close" id="svcModalClose" onclick="closeServiceModal()" aria-label="Close">&times;</button>
-    <div class="svc-modal-inner">
-        <div class="svc-modal-photo-wrap">
-            <img class="svc-modal-photo" id="svcModalPhoto" src="" alt="" loading="lazy">
-            <div class="svc-modal-photo-placeholder" id="svcModalPhotoPlaceholder">
-                <span id="svcModalPhotoIcon"></span>
-                <span>Photo coming soon</span>
+<!-- ═══════════════ SERVICE DETAIL DRAWER ═══════════════ -->
+<div class="svc-backdrop" id="svcModalBackdrop" onclick="closeServiceModal()"></div>
+
+<aside class="svc-drawer" id="svcModal" role="dialog" aria-modal="true" aria-labelledby="svcModalTitle">
+
+    <div class="svc-drawer-header" id="svcDrawerHeader">
+        <button class="svc-drawer-close" onclick="closeServiceModal()" aria-label="Close">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="svc-drawer-photo-wrap">
+            <img class="svc-drawer-photo" id="svcModalPhoto" src="" alt="" loading="lazy">
+            <div class="svc-drawer-photo-placeholder" id="svcModalPhotoPlaceholder">
+                <span class="svc-drawer-icon-lg" id="svcModalPhotoIcon"></span>
             </div>
-            <div class="svc-modal-photo-badge" id="svcModalBadgeIcon"></div>
         </div>
-        <div class="svc-modal-body">
-            <span class="section-tag" id="svcModalTag">Service</span>
-            <h2 class="svc-modal-title" id="svcModalTitle"></h2>
-            <p class="svc-modal-desc" id="svcModalDesc"></p>
-
-            <div class="svc-modal-highlights" id="svcModalHighlights"></div>
-
-            <div class="svc-modal-includes">
-                <h4>What's included</h4>
-                <div class="svc-modal-items" id="svcModalItems"></div>
-            </div>
-
-            <div class="svc-modal-actions">
-                <a id="svcModalWhatsapp" href="{{ site.whatsapp_url }}"
-                   target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-                    💬 Book This Service
-                </a>
-            </div>
+        <div class="svc-drawer-header-bottom">
+            <div class="svc-drawer-badge" id="svcModalBadgeIcon"></div>
+            <h2 class="svc-drawer-title" id="svcModalTitle"></h2>
         </div>
     </div>
-</div>
+
+    <div class="svc-drawer-body">
+        <p class="svc-drawer-desc" id="svcModalDesc"></p>
+
+        <div class="svc-drawer-highlights" id="svcModalHighlights"></div>
+
+        <div class="svc-drawer-includes">
+            <h4>What's included</h4>
+            <div class="svc-drawer-items" id="svcModalItems"></div>
+        </div>
+
+        <div class="svc-drawer-actions">
+            <a id="svcModalWhatsapp" href="{{ site.whatsapp_url }}"
+               target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Book This Service
+            </a>
+        </div>
+    </div>
+
+</aside>
 
 
 <!-- ═══════════════ CTA ═══════════════ -->
 <section class="cta-banner">
     <div class="container text-center">
         <div class="cta-inner">
-            <h2 class="anim-fade-up">Not Sure What You Need?</h2>
-            <p class="anim-fade-up">Chat with Arathi directly — she'll recommend the perfect treatment for you.</p>
+            <h2 class="anim-fade-up">Ready to Look Your Best?</h2>
+            <p class="anim-fade-up">Book your appointment on WhatsApp — quick, easy, no waiting.</p>
             <a href="{{ site.whatsapp_url }}"
-               target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg anim-fade-up">
-                💬 Ask Arathi on WhatsApp
+               target="_blank" rel="noopener noreferrer" class="btn btn-glass btn-lg anim-fade-up">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Ask Arathi on WhatsApp
             </a>
         </div>
     </div>
@@ -135,58 +271,73 @@
 {% block extra_js %}
 <script>
 (function () {
-    const WA_BASE = "{{ site.whatsapp_url }}";
     const WA_NUMBER = "{{ site.whatsapp_number }}";
+
+    // Darker companion gradient shade for each card accent
+    const ACCENT_PAIRS = {
+        '#7C3AED': '#5B21B6',
+        '#9333EA': '#7C3AED',
+        '#6D28D9': '#4C1D95',
+        '#BE185D': '#9D174D',
+        '#C026D3': '#A21CAF',
+        '#4F46E5': '#3730A3',
+        '#A21CAF': '#86198F',
+    };
 
     window.openServiceModal = function (el) {
         const title      = el.dataset.title;
-        const icon       = el.dataset.icon;
+        const iconHtml   = el.querySelector('.svc-card-icon').innerHTML;
         const desc       = el.dataset.description;
         const highlights = el.dataset.highlights.split('||').filter(Boolean);
         const items      = el.dataset.items.split('||').filter(Boolean);
         const photo      = el.dataset.photo;
+        const accent     = el.dataset.accent || '#7C3AED';
+        const accentDark = ACCENT_PAIRS[accent] || accent;
 
+        // Gradient header matching the card's accent colour
+        document.getElementById('svcDrawerHeader').style.background =
+            `linear-gradient(145deg, ${accent} 0%, ${accentDark} 100%)`;
+
+        // Text content
         document.getElementById('svcModalTitle').textContent = title;
         document.getElementById('svcModalDesc').textContent  = desc;
-        document.getElementById('svcModalPhotoIcon').textContent = icon;
-        document.getElementById('svcModalBadgeIcon').textContent = icon;
 
-        // Photo: show image if it loads, fallback to placeholder
-        const img = document.getElementById('svcModalPhoto');
+        // Icons
+        document.getElementById('svcModalBadgeIcon').innerHTML = iconHtml;
+        document.getElementById('svcModalPhotoIcon').innerHTML = iconHtml;
+
+        // Photo (show if loads, else show placeholder with icon)
+        const img         = document.getElementById('svcModalPhoto');
         const placeholder = document.getElementById('svcModalPhotoPlaceholder');
         img.style.display = 'none';
         placeholder.style.display = 'flex';
-        img.onload = () => {
-            img.style.display = 'block';
-            placeholder.style.display = 'none';
-        };
-        img.onerror = () => {
-            img.style.display = 'none';
-            placeholder.style.display = 'flex';
-        };
+        img.onload  = () => { img.style.display = 'block'; placeholder.style.display = 'none'; };
+        img.onerror = () => { img.style.display = 'none';  placeholder.style.display = 'flex'; };
         img.src = photo;
         img.alt = title;
 
         // Highlights
-        const hlEl = document.getElementById('svcModalHighlights');
-        hlEl.innerHTML = highlights.map(h =>
+        document.getElementById('svcModalHighlights').innerHTML = highlights.map(h =>
             `<div class="svc-highlight-item"><span class="svc-highlight-dot">✦</span>${h}</div>`
         ).join('');
 
-        // Items
-        const itemsEl = document.getElementById('svcModalItems');
-        itemsEl.innerHTML = items.map(it =>
+        // Included treatments
+        document.getElementById('svcModalItems').innerHTML = items.map(it =>
             `<span class="service-item-tag">${it}</span>`
         ).join('');
 
-        // WhatsApp link with service name
+        // Personalised WhatsApp link
         const msg = encodeURIComponent(`Hi, I'd like to book the ${title} service at Lookwell Parlour 💜`);
         document.getElementById('svcModalWhatsapp').href = `https://wa.me/${WA_NUMBER}?text=${msg}`;
 
-        // Open modal
+        // Open drawer
         document.getElementById('svcModalBackdrop').classList.add('show');
         document.getElementById('svcModal').classList.add('show');
         document.body.style.overflow = 'hidden';
+
+        // Reset scroll position inside drawer body
+        const body = document.querySelector('.svc-drawer-body');
+        if (body) body.scrollTop = 0;
     };
 
     window.closeServiceModal = function () {
@@ -195,7 +346,7 @@
         document.body.style.overflow = '';
     };
 
-    // Close on Escape key
+    // Close on Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeServiceModal();
     });

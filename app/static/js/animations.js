@@ -76,7 +76,9 @@
         '.credentials-grid .credential-card',
         '.reviews-grid .review-card',
         '.stats-row .stat-block',
-        '.service-blocks .service-block'
+        '.service-blocks .service-block',
+        '.philosophy-grid .philosophy-card',
+        '.journey-track .journey-step'
     ];
 
     cardGroups.forEach((selector) => {

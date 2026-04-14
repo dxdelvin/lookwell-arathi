@@ -58,23 +58,33 @@
     }
 
     if (hamburger && navLinks) {
+        const navLogo = document.querySelector('.nav-logo');
+
+        const closeMenu = () => {
+            hamburger.classList.remove('open');
+            navLinks.classList.remove('open');
+            if (navOverlay) navOverlay.classList.remove('show');
+            if (navbar) navbar.classList.remove('drawer-open');
+            document.body.style.overflow = '';
+        };
+
         const toggle = () => {
             const open = hamburger.classList.toggle('open');
             navLinks.classList.toggle('open', open);
             if (navOverlay) navOverlay.classList.toggle('show', open);
+            if (navbar) navbar.classList.toggle('drawer-open', open);
             document.body.style.overflow = open ? 'hidden' : '';
         };
 
         hamburger.addEventListener('click', toggle);
-        if (navOverlay) navOverlay.addEventListener('click', toggle);
+        if (navOverlay) navOverlay.addEventListener('click', closeMenu);
+
+        /* Close via the X button inside the drawer */
+        const drawerX = document.getElementById('drawerX');
+        if (drawerX) drawerX.addEventListener('click', closeMenu);
 
         navLinks.querySelectorAll('.nav-link, .nav-cta').forEach((link) => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('open');
-                navLinks.classList.remove('open');
-                if (navOverlay) navOverlay.classList.remove('show');
-                document.body.style.overflow = '';
-            });
+            link.addEventListener('click', closeMenu);
         });
     }
 

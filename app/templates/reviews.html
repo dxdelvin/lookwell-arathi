@@ -1,6 +1,58 @@
 {% extends "base.html" %}
-{% block title %}Reviews — {{ site.name }}{% endblock %}
-{% block meta_description %}See what our clients say about {{ site.name }}. {{ site.rating }}★ rating from 10,000+ happy customers.{% endblock %}
+{% set _rev_accents = ['#7C3AED','#BE185D','#C026D3','#4F46E5','#9333EA','#A21CAF'] %}
+{% block title %}Client Reviews — {{ site.name }} | {{ site.rating }}★ Rated Beauty Parlour Airoli{% endblock %}
+{% block meta_description %}Read {{ site.review_count | int }}+ client reviews of {{ site.name }}, Airoli. {{ site.rating }}★ Google rated ladies beauty parlour by {{ site.owner }}. See why women across Navi Mumbai & Mumbai trust us.{% endblock %}
+{% block meta_keywords %}lookwell parlour reviews, beauty parlour reviews airoli, best rated parlour navi mumbai, lookwell customer feedback, ladies parlour reviews mumbai, {{ site.owner }} reviews, beauty expert reviews airoli{% endblock %}
+{% block canonical %}{{ site.site_url }}/reviews{% endblock %}
+{% block og_title %}Client Reviews — {{ site.name }} | {{ site.rating }}★ Rated{% endblock %}
+{% block og_description %}{{ site.rating }}★ rated by {{ site.review_count | int }}+ happy clients. Read real reviews of {{ site.name }}, Airoli, Navi Mumbai.{% endblock %}
+{% block og_url %}{{ site.site_url }}/reviews{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "{{ site.site_url }}/#localbusiness",
+    "name": "{{ site.name }}",
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "{{ site.rating }}",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "{{ site.review_count }}"
+    },
+    "review": [
+        {% for rev in site.reviews %}
+        {
+            "@type": "Review",
+            "author": {
+                "@type": "Person",
+                "name": "{{ rev.name }}"
+            },
+            "datePublished": "{{ rev.date }}",
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "{{ rev.rating }}",
+                "bestRating": "5"
+            },
+            "reviewBody": "{{ rev.text }}"
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+    ]
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.site_url }}/"},
+        {"@type": "ListItem", "position": 2, "name": "Reviews", "item": "{{ site.site_url }}/reviews"}
+    ]
+}
+</script>
+{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="/static/css/reviews.css">
@@ -10,39 +62,64 @@
 
 <!-- ═══════════════ REVIEWS HERO ═══════════════ -->
 <section class="page-hero reviews-hero">
-    <div class="deco deco-blob" style="width:120px;height:120px;background:var(--accent);top:-20px;right:-20px;opacity:0.06;"></div>
-    <div class="deco deco-float" style="width:70px;height:70px;border:3px solid var(--primary-light);border-radius:50%;bottom:20%;left:6%;opacity:0.08;"></div>
-    <div class="container">
-        <span class="section-tag anim-fade-up">Testimonials</span>
-        <h1 class="page-hero-title anim-fade-up">What People <em>Say</em></h1>
-        <p class="page-hero-desc anim-fade-up">Real words from real clients who trusted Arathi with their beauty.</p>
+    <div class="rev-orb rev-orb-1"></div>
+    <div class="rev-orb rev-orb-2"></div>
+    <div class="rev-orb rev-orb-3"></div>
+    <div class="container rev-hero-inner">
+        <span class="section-tag rev-hero-tag anim-fade-up">Testimonials</span>
+        <h1 class="rev-hero-heading anim-fade-up">What Clients <em>Say</em></h1>
+        <p class="rev-hero-sub anim-fade-up">Real words from real clients who trusted {{ site.owner }} with their beauty.</p>
+        <div class="rev-hero-stats anim-fade-up">
+            <div class="rev-hero-stat">
+                <span class="rev-hero-stat-num">{{ site.rating }}</span>
+                <span class="rev-hero-stat-label">Google Rating</span>
+            </div>
+            <span class="rev-hero-stat-sep"></span>
+            <div class="rev-hero-stat">
+                <span class="rev-hero-stat-num">10K+</span>
+                <span class="rev-hero-stat-label">Happy Clients</span>
+            </div>
+            <span class="rev-hero-stat-sep"></span>
+            <div class="rev-hero-stat">
+                <span class="rev-hero-stat-num">{{ site.years_experience }}+</span>
+                <span class="rev-hero-stat-label">Years of Trust</span>
+            </div>
+        </div>
     </div>
 </section>
 
 
-<!-- ═══════════════ STATS BAR ═══════════════ -->
-<section class="review-stats">
+<!-- ═══════════════ RATING OVERVIEW ═══════════════ -->
+<section class="rev-overview">
     <div class="container">
-        <div class="stats-row">
-            <div class="stat-block anim-fade-up">
-                <div class="stat-block-icon">⭐</div>
-                <span class="stat-num">{{ site.rating }}★</span>
-                <span class="stat-label">Google Rating</span>
+        <div class="rev-scorecard anim-fade-up">
+            <div class="rev-score-left">
+                <span class="rev-score-big">{{ site.rating }}</span>
+                <div class="rev-score-stars">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none" opacity="0.3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <span class="rev-score-label">Based on 100+ reviews</span>
             </div>
-            <div class="stat-block anim-fade-up">
-                <div class="stat-block-icon">💜</div>
-                <span class="stat-num">10K+</span>
-                <span class="stat-label">Happy Clients</span>
-            </div>
-            <div class="stat-block anim-fade-up">
-                <div class="stat-block-icon">🏆</div>
-                <span class="stat-num">{{ site.years_experience }}+</span>
-                <span class="stat-label">Years of Trust</span>
-            </div>
-            <div class="stat-block anim-fade-up">
-                <div class="stat-block-icon">🎓</div>
-                <span class="stat-num">4</span>
-                <span class="stat-label">Certifications</span>
+            <div class="rev-score-sep"></div>
+            <div class="rev-score-right">
+                <div class="rev-score-badges">
+                    <div class="rev-badge">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <span>Google Verified</span>
+                    </div>
+                    <div class="rev-badge">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                        <span>4 Certifications</span>
+                    </div>
+                    <div class="rev-badge">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        <span>Trusted by 10K+</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -54,45 +131,98 @@
     <div class="container">
         <div class="reviews-grid">
             {% for rev in site.reviews %}
+            {% set _accent = _rev_accents[loop.index0 % _rev_accents|length] %}
+
+            {% if loop.first %}
+            <!-- ── Featured Review ── -->
+            <div class="review-card review-card--featured anim-fade-up">
+                <div class="review-featured-accent"></div>
+                <span class="review-quote-mark">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" stroke="none" opacity="0.08"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                </span>
+                <div class="review-card-header">
+                    <div class="review-avatar review-avatar--lg">{{ rev.name[0] }}</div>
+                    <div class="review-meta">
+                        <strong>{{ rev.name }}</strong>
+                        <span class="review-meta-row">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            {{ rev.date }}
+                        </span>
+                    </div>
+                </div>
+                <div class="review-stars">
+                    {% for i in range(rev.rating) %}
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    {% endfor %}
+                    {% for i in range(5 - rev.rating) %}
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none" opacity="0.15"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    {% endfor %}
+                </div>
+                <p class="review-text">"{{ rev.text }}"</p>
+                <span class="review-card-tag">Featured Review</span>
+            </div>
+
+            {% else %}
+            <!-- ── Regular Review ── -->
             <div class="review-card anim-fade-up">
-                <span class="review-quote-mark">"</span>
+                <span class="review-quote-mark">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" opacity="0.06"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                </span>
                 <div class="review-card-header">
                     <div class="review-avatar">{{ rev.name[0] }}</div>
                     <div class="review-meta">
                         <strong>{{ rev.name }}</strong>
-                        <span>{{ rev.date }}</span>
+                        <span class="review-meta-row">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            {{ rev.date }}
+                        </span>
                     </div>
                 </div>
                 <div class="review-stars">
-                    {% for i in range(rev.rating) %}★{% endfor %}{% for i in range(5 - rev.rating) %}☆{% endfor %}
+                    {% for i in range(rev.rating) %}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    {% endfor %}
+                    {% for i in range(5 - rev.rating) %}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none" opacity="0.15"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    {% endfor %}
                 </div>
                 <p class="review-text">"{{ rev.text }}"</p>
             </div>
+            {% endif %}
+
             {% endfor %}
+        </div>
+
+        <!-- Google CTA Inline -->
+        <div class="rev-google-cta anim-fade-up">
+            <div class="rev-google-cta-inner">
+                <div class="rev-google-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div class="rev-google-text">
+                    <h3>Loved your experience at Lookwell?</h3>
+                    <p>Share your feedback and help other women discover us.</p>
+                </div>
+                <a href="{{ site.google_maps_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    Leave a Google Review
+                </a>
+            </div>
         </div>
     </div>
 </section>
 
 
-<!-- ═══════════════ CTA ROW ═══════════════ -->
-<section class="review-cta-row">
-    <div class="container">
-        <div class="review-cta-cards">
-            <div class="review-cta-card purple anim-fade-up">
-                <h3>Loved Your Experience?</h3>
-                <p>Share your feedback and help other women discover Lookwell Parlour.</p>
-                <a href="{{ site.google_maps_url }}" target="_blank" rel="noopener noreferrer" class="btn">
-                    ⭐ Leave a Google Review
-                </a>
-            </div>
-            <div class="review-cta-card pink anim-fade-up">
-                <h3>Book Your Next Visit</h3>
-                <p>Ready for your next glow-up? Book an appointment on WhatsApp.</p>
-                <a href="{{ site.whatsapp_url }}"
-                   target="_blank" rel="noopener noreferrer" class="btn">
-                    💬 Book on WhatsApp
-                </a>
-            </div>
+<!-- ═══════════════ CTA ═══════════════ -->
+<section class="cta-banner">
+    <div class="container text-center">
+        <div class="cta-inner">
+            <h2 class="anim-fade-up">Ready for Your <em>Transformation</em>?</h2>
+            <p class="anim-fade-up">Book your next appointment on WhatsApp — quick, easy, no waiting.</p>
+            <a href="{{ site.whatsapp_url }}"
+               target="_blank" rel="noopener noreferrer" class="btn btn-glass btn-lg anim-fade-up">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Book on WhatsApp
+            </a>
         </div>
     </div>
 </section>

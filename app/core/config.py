@@ -1,6 +1,22 @@
+# ── SVG Icons (outline style, inherits currentColor) ──
+_ICONS = {
+    "sparkle": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><path d="M5 3v4M19 17v4M3 5h4M17 19h4"/></svg>',
+    "scissors": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>',
+    "zap": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
+    "star": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    "palette": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.65-.75 1.65-1.69 0-.44-.18-.83-.44-1.12-.29-.3-.44-.66-.44-1.13 0-.92.75-1.67 1.67-1.67H17c3.04 0 5.56-2.5 5.56-5.56C22 6.01 17.5 2 12 2z"/></svg>',
+    "brush": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>',
+    "gem": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>',
+    "feather": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><path d="M16 8 2 22"/><path d="M17.5 15H9"/></svg>',
+    "award": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>',
+    "graduation": '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 6 3 6 3s3 0 6-3v-5"/></svg>',
+}
+
 SITE = {
     "name": "Lookwell Ladies Beauty Parlour",
+    "short_name": "Loowell Parlour",
     "tagline": "Invest in Yourself",
+    "site_url": "https://lookwell.in",
     "owner": "Arathi Dsouza",
     "owner_title": "Professionally Trained Beauty Expert",
     "phone_primary": "+91 9773429147",
@@ -10,6 +26,10 @@ SITE = {
     "whatsapp_url": "https://wa.me/919773429147?text=Hi%2C%20I'd%20like%20to%20book%20an%20appointment%20at%20Lookwell%20Parlour%20%F0%9F%92%9C",
     "email": "",
     "address": "AL-1/431, Ramdev Apt, Sector 16, Behind Radhika Bai School, Airoli, Navi Mumbai, Maharashtra 400708",
+    "city": "Navi Mumbai",
+    "state": "Maharashtra",
+    "pincode": "400708",
+    "country": "IN",
     "coordinates": {"lat": 19.1512, "lng": 72.9935},
     "google_maps_url": "https://maps.google.com/?q=Lookwell+Ladies+Beauty+Parlour+Airoli",
     "social": {
@@ -17,20 +37,24 @@ SITE = {
         "instagram": "https://www.instagram.com/lookwell_ladies_boutique/",
         "google": "https://g.co/kgs/Lookwell",
     },
+    "og_image": "/static/img/lookwell-og.jpg",
+    "hours": "Tu-Su 10:00-20:00",
+    "hours_display": "Tue — Sun: 10:00 AM – 8:00 PM (Closed Monday)",
+    "price_range": "₹₹",
     "rating": 4.3,
     "review_count": 10000,
     "years_experience": 18,
     "training": [
-        {"name": "VLCC", "icon": "🏅"},
-        {"name": "Jawed Habib", "icon": "✂️"},
-        {"name": "Lakme", "icon": "💄"},
-        {"name": "ICAN", "icon": "🎓"},
+        {"name": "VLCC", "icon": _ICONS["award"]},
+        {"name": "Jawed Habib", "icon": _ICONS["scissors"]},
+        {"name": "Lakme", "icon": _ICONS["palette"]},
+        {"name": "ICAN", "icon": _ICONS["graduation"]},
     ],
     "services": [
         {
             "id": "skin",
             "title": "Skin Treatment",
-            "icon": "✨",
+            "icon": _ICONS["sparkle"],
             "description": "Rejuvenate your skin with expert facial treatments, cleanup sessions, and advanced skincare therapies tailored to your skin type.",
             "long_description": "Our skin treatments are designed to address your unique skin concerns using premium products and proven techniques. Whether you're dealing with pigmentation, acne, dullness, or signs of aging, Arathi will assess your skin and recommend the perfect regime. Every session begins with a thorough skin analysis followed by deep cleansing, targeted treatment, and soothing care. Walk out glowing every time.",
             "highlights": ["Customised for your skin type", "Premium product range", "Visible results from first session", "Hygienic & relaxing environment"],
@@ -40,7 +64,7 @@ SITE = {
         {
             "id": "hair",
             "title": "Hair Treatment",
-            "icon": "💇‍♀️",
+            "icon": _ICONS["scissors"],
             "description": "From trendy cuts to nourishing treatments — transform your hair with our styling and care expertise.",
             "long_description": "Great hair starts with great care. At Lookwell, we offer a complete range of hair services from precision cuts and styling to intensive nourishing treatments. Trained at Jawed Habib Academy, Arathi understands hair structure and uses the right products to restore shine, manage damage, and create styles that suit your face and personality. Whether you want a bold new colour or a hydrating spa day for your hair, we've got you.",
             "highlights": ["Jawed Habib trained stylist", "All hair types & textures", "Colour, cut, and treatments", "Damage repair & nourishment"],
@@ -50,7 +74,7 @@ SITE = {
         {
             "id": "laser",
             "title": "Laser Treatment",
-            "icon": "⚡",
+            "icon": _ICONS["zap"],
             "description": "Advanced laser technology for permanent hair reduction and skin rejuvenation with safe, effective results.",
             "long_description": "Say goodbye to unwanted hair and skin imperfections with our modern laser treatments. We use advanced, dermatologist-grade laser technology that targets hair follicles and pigmentation with precision — leaving surrounding skin unaffected. Our sessions are quick, virtually painless, and deliver long-lasting results. Ideal for all skin tones, this is your ticket to silky-smooth, confident skin.",
             "highlights": ["Long-lasting hair reduction", "Safe for all skin tones", "Quick & virtually painless", "Pigmentation & skin renewal"],
@@ -60,7 +84,7 @@ SITE = {
         {
             "id": "aesthetic",
             "title": "Aesthetic Treatments",
-            "icon": "🌸",
+            "icon": _ICONS["star"],
             "description": "Enhance your natural beauty with our aesthetic treatments designed for a flawless, youthful look.",
             "long_description": "Our aesthetic treatments are for those who want to enhance their features with precision and artistry. From perfectly shaped microbladed brows to the lit-from-within BB Glow, each treatment is performed with the highest hygiene standards and attention to detail. These semi-permanent and advanced skin procedures are ideal for clients looking for low-maintenance, high-impact beauty.",
             "highlights": ["Semi-permanent & long-lasting", "Certified aesthetic techniques", "Natural & enhancing results", "Strict hygiene protocols"],
@@ -70,7 +94,7 @@ SITE = {
         {
             "id": "makeup",
             "title": "Professional Makeup",
-            "icon": "💋",
+            "icon": _ICONS["palette"],
             "description": "Stunning makeup for every occasion — from bridal glam to party perfection, crafted by expertly trained artists.",
             "long_description": "Your big moment deserves a flawless look. Arathi, trained at Lakme Academy, specialises in bridal and occasion makeup that photographs beautifully and lasts all day. She takes the time to understand your vision, complexion, and outfit to create a look that's uniquely yours. From classic elegance to bold and dramatic, no look is too simple or too grand.",
             "highlights": ["Lakme Academy certified", "Trial sessions available", "Bridal & party specialist", "HD & Airbrush options"],
@@ -80,7 +104,7 @@ SITE = {
         {
             "id": "nails",
             "title": "Nail Art",
-            "icon": "💅",
+            "icon": _ICONS["brush"],
             "description": "Express yourself with creative nail designs, gel extensions, and luxurious manicure & pedicure sessions.",
             "long_description": "Your nails are a canvas — let us make them a masterpiece. Our nail services range from deep-cleansing manicures and pedicures to intricate nail art, gel polish, and full acrylic or gel extensions. We use only high-quality, long-lasting products to ensure your nails stay beautiful for weeks. Whether you prefer minimalist chic or bold statement nails, our artists bring your vision to life.",
             "highlights": ["Long-lasting gel & acrylic", "Custom nail art designs", "Relaxing mani-pedi sessions", "Nail repair & strengthening"],
@@ -90,7 +114,7 @@ SITE = {
         {
             "id": "waxing",
             "title": "Waxing & Threading",
-            "icon": "🪷",
+            "icon": _ICONS["feather"],
             "description": "Smooth, flawless skin with our gentle and hygienic hair removal services.",
             "long_description": "Achieve silky-smooth skin with our safe and effective hair removal services. We offer a wide range of waxing options — from classic to Rica and chocolate wax — suited to sensitive and normal skin alike. Our threading service delivers perfectly shaped brows and clean facial hair removal with speed and precision. All tools are single-use and hygienic for your complete peace of mind.",
             "highlights": ["Rica & chocolate wax available", "Sensitive skin friendly", "Expert eyebrow shaping", "Single-use hygienic tools"],
