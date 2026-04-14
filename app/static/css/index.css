@@ -328,106 +328,113 @@
 /* ── Tile ── */
 .svc-tile {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 16px;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 14px;
     background: var(--white);
-    border-radius: 14px;
-    padding: 18px 18px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 18px;
+    padding: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
     text-decoration: none;
-    transition: box-shadow 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
+    transition: box-shadow 0.25s var(--ease-spring), transform 0.25s var(--ease-spring);
+    position: relative;
+    overflow: hidden;
 }
 
 .svc-tile:hover {
-    box-shadow: 0 8px 28px rgba(124, 58, 237, 0.09);
-    border-color: rgba(124, 58, 237, 0.18);
-    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(124, 58, 237, 0.06);
+    transform: translateY(-4px);
+}
+
+.svc-tile-accent {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s var(--ease);
+}
+.svc-tile:hover .svc-tile-accent { transform: scaleX(1); }
+
+.svc-tile-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 /* Icon */
 .svc-tile-icon-wrap {
     flex-shrink: 0;
-    width: 46px; height: 46px;
+    width: 48px; height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(124, 58, 237, 0.07);
+    background: rgba(124, 58, 237, 0.06);
     border-radius: 12px;
     color: var(--primary);
-    transition: background 0.22s ease;
+    transition: transform 0.22s var(--ease-spring);
 }
 
 .svc-tile:hover .svc-tile-icon-wrap {
-    background: rgba(124, 58, 237, 0.13);
-}
-
-.svc-tile-icon-wrap svg {
-    width: 20px; height: 20px;
-}
-
-/* Content */
-.svc-tile-content {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.svc-tile-header {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-}
-
-.svc-tile-title {
-    font-size: 0.92rem;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1.3;
-    margin: 0;
+    transform: scale(1.05) rotate(-2deg);
 }
 
 .svc-tile-count {
-    font-size: 0.67rem;
-    font-weight: 600;
-    color: var(--primary);
-    background: rgba(124, 58, 237, 0.07);
-    border-radius: 20px;
-    padding: 2px 7px;
-    white-space: nowrap;
-    flex-shrink: 0;
+    background: rgba(244, 114, 182, 0.1);
+    color: var(--secondary);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--r-full);
 }
 
-.svc-tile-count::after { content: " treatments"; }
+.svc-tile-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.svc-tile-title {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.25;
+    margin: 0;
+}
 
 .svc-tile-desc {
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     color: var(--text-light);
-    line-height: 1.55;
+    line-height: 1.5;
     margin: 0;
+}
+
+.svc-tile-footer {
+    display: flex;
+    align-items: center;
 }
 
 .svc-tile-cta {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    font-size: 0.75rem;
-    font-weight: 600;
+    gap: 4px;
+    font-size: 0.78rem;
+    font-weight: 700;
     color: var(--primary);
-    margin-top: 4px;
-    transition: gap 0.2s ease;
+    transition: gap 0.2s var(--ease-spring);
 }
 
 .svc-tile:hover .svc-tile-cta { gap: 8px; }
 
-.svc-cta-arrow {
-    width: 14px; height: 14px;
-    transition: transform 0.2s ease;
+.svc-tile-arrow {
+    transition: transform 0.2s var(--ease-spring);
 }
 
-.svc-tile:hover .svc-cta-arrow { transform: translateX(2px); }
+.svc-tile:hover .svc-tile-arrow { transform: translateX(3px); }
 
 /* ── "View All" 8th tile ──────────────────── */
 .svc-tile--all {
@@ -820,16 +827,6 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
     }
-
-    /* Switch back to vertical card layout at 2 cols */
-    .svc-tile {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-        padding: 20px 18px;
-    }
-
-    .svc-tile-icon-wrap { margin-bottom: 2px; }
 }
 
 @media (min-width: 640px) {
@@ -1004,29 +1001,4 @@
         box-sizing: border-box;
     }
     .map-detail div { text-align: left; }
-
-    /* Services — compact horizontal list on tiny screens */
-    .svc-tile {
-        flex-direction: row;
-        align-items: flex-start;
-        padding: 14px 14px;
-        gap: 13px;
-    }
-
-    .svc-tile-icon-wrap {
-        width: 40px; height: 40px;
-        border-radius: 10px;
-        flex-shrink: 0;
-        margin-top: 1px;
-    }
-
-    .svc-tile-icon-wrap svg { width: 18px; height: 18px; }
-
-    .svc-tile-title { font-size: 0.88rem; }
-
-    .svc-tile-desc { display: none; }
-
-    .svc-tile-count::after { content: ""; }
-
-    .svc-tile-cta { display: none; }
 }

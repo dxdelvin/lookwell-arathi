@@ -350,6 +350,27 @@
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeServiceModal();
     });
+
+    // Open modal on load if URL has hash (e.g., #nails)
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.location.hash) {
+            const targetId = window.location.hash.substring(1);
+            if (targetId) {
+                const targetCard = document.getElementById(targetId);
+                // Check if the element exists and has the svc-card class
+                if (targetCard && targetCard.classList.contains('svc-card')) {
+                    // Open the drawer
+                    openServiceModal(targetCard);
+                    
+                    // After opening, manually scroll the page a bit down so the card isn't hidden under the navbar
+                    setTimeout(() => {
+                        const y = targetCard.getBoundingClientRect().top + window.scrollY - 100;
+                        window.scrollTo({ top: y, behavior: 'smooth' });
+                    }, 100);
+                }
+            }
+        }
+    });
 })();
 </script>
 {% endblock %}
